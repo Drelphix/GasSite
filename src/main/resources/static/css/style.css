@@ -1,3 +1,36 @@
+:root {
+	background-color: #2980b9;
+	background: -webkit-linear-gradient(235deg, #71b073 29.9%, #2776aa 80%), -webkit-linear-gradient(146deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%), -webkit-linear-gradient(80deg, #b1c9d8 19.9%, #2776aa 50%), -webkit-linear-gradient(305deg, #f4df26 15.9%, #ff1b9a 40%);
+	background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%), linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%), linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%), linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);
+	background-repeat: no-repeat;
+	background-blend-mode: hard-light;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	height: 100vh;
+}
+body {
+	background: none;
+	-webkit-box-flex: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	padding: 2em;
+}
+h1 {
+	color: rgba(255, 255, 255, 0.2);
+	font-size: 15vw;
+	font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+	text-align: center;
+	text-shadow: 0.02em 0.02em 0.02em rgba(0, 0, 0, 0.08);
+	filter: drop-shadow(0.045em 0.045em 0.04em rgba(0, 0, 0, 0.21));
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -7,7 +40,7 @@
 	max-width: 400px;
 	padding: 60px 50px;
 	margin: 50px auto 0;
-	background-image: url(https://html5book.ru/wp-content/uploads/2017/01/photo-roses.jpg);
+
 	background-size: cover;
 }
 
@@ -18,7 +51,6 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(to right bottom, rgba(43, 44, 78, .5), rgba(104, 22, 96, .5));
 }
 
 .form-inner {
@@ -33,16 +65,6 @@
 	font-weight: 300;
 	font-size: 26px;
 	text-transform: uppercase;
-}
-
-.form-inner h3:after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: -6px;
-	height: 2px;
-	width: 60px;
-	background: #1762EE;
 }
 
 .form-inner label {
@@ -105,6 +127,10 @@
 	transform: rotate(45deg);
 }
 
-.form-inner input[type="submit"] {
+.input[type="submit"] {
 	background: #1762EE;
+}
+
+.reginput[type="submit"] {
+	background: #f69a73;
 }

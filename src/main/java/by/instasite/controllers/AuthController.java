@@ -41,6 +41,7 @@ public class AuthController {
         return "register";
     }
 
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);

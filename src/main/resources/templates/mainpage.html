@@ -7,6 +7,14 @@
 <p1>Ehoooo</p1>
 
 <h1>Result</h1>
-<tr th:each="user: ${users}">
+<tbody>
+<tr th:each="user : ${users}">
+    <td th:text="${user.username}"></td>
+    <td th:text="${user.password}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.country}"></td>
+</tr>
+
+</tbody>
 </body>
 </html>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class AuthController {
     private UserService service;
@@ -31,7 +33,7 @@ public class AuthController {
         try {
             User databaseUser = service.getUserByUsername(user.getUsername());
             if (databaseUser.getPassword().equals(user.getPassword())) {
-                return "mainpage";
+                return "redirect:/mainpage";
             } else return "login";
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -56,14 +58,18 @@ public class AuthController {
                 }
             }
         }
-
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/mainpage", method = RequestMethod.GET)
+    @GetMapping(value = "/mainpage")
     public String MainPage(Model model) {
-        model.addAttribute("users");
-
+        List<User> users = service.findAll();
+        model.addAttribute("users", users);
         return "mainpage";
+    }
+
+    @GetMapping(value = "/error")
+    public String ErrorPage(Model model) {
+        return "errorpage";
     }
 }

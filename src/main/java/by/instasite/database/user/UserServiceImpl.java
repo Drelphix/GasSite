@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
     public void updateUser(String username, String password, String email, String country) {
         User updated = repository.findByUsername(username);
         updated.setPassword(password);

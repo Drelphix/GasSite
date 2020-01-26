@@ -49,14 +49,34 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String RegistrationSubmit(@ModelAttribute User user, Model model) {
+    public String RegistrationSubmit(@ModelAttribute User user, String error, Model model) {
         model.addAttribute("user", user);
-        if (!user.getUsername().isEmpty()) {
-            if (!user.getPassword().isEmpty()) {
-                if (!user.getEmail().isEmpty()) {
-                    service.saveUser(user);
+        model.addAttribute("error", error);
+        try {
+
+            if (!user.getUsername().isEmpty()) {
+                User temp = service.getUserByUsername(user.getUsername());
+                if (!user.getPassword().isEmpty() && !temp.getUsername().equals(user.getUsername())) {
+                    if (!user.getEmail().isEmpty()) {
+                        temp = service.getUserByEmail(user.getEmail());
+                        if (temp.getEmail().isEmpty()) {
+                            service.saveUser(user);
+                        } else {
+                            error = "Е-мейл занят";
+                            return "redirect:/";
+                        }
+                    }
+
+                } else {
+                    error = "Неверное имя пользователя или пароль";
+                    return "redirect:/";
                 }
+            } else {
+                error = "Введите имя пользователя";
+                return "Е-мейл занят";
             }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return "redirect:/";
     }

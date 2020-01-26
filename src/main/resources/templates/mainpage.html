@@ -7,7 +7,6 @@
 <p1>Ehoooo</p1>
 
 <h1>Result</h1>
-<p th:text="'Login: ' + ${login.username}" />
-<p th:text="'Password: ' + ${login.password}" />
+<tr th:each="user: ${users}">
 </body>
 </html>

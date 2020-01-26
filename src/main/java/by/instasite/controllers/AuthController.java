@@ -67,9 +67,4 @@ public class AuthController {
         model.addAttribute("users", users);
         return "mainpage";
     }
-
-    @GetMapping(value = "/error")
-    public String ErrorPage(Model model) {
-        return "errorpage";
-    }
 }

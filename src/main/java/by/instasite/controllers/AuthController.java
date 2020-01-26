@@ -29,8 +29,10 @@ public class AuthController {
     public String LoginSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
         User find = service.getUserByUsername(user.getUsername());
-        if ()
-            return "register";
+        if (find.getUsername().equals(user.getUsername())) {
+            return "mainpage";
+        } else return "register";
+
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -42,6 +44,7 @@ public class AuthController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
+
         return "redirect:/";
     }
 }

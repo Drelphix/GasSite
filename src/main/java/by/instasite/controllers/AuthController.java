@@ -29,12 +29,8 @@ public class AuthController {
     public String LoginSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
         try {
-            String username = user.getUsername();
-            System.out.println("\n username:" + username);
-            User databaseUser = service.getUserByUsername(username);
-            System.out.println(databaseUser.getUsername());
-            String password = user.getPassword();
-            if (databaseUser.getPassword().equals(password)) {
+            User databaseUser = service.getUserByUsername(user.getUsername());
+            if (databaseUser.getPassword().equals(user.getPassword())) {
                 return "mainpage";
             } else return "login";
         } catch (NullPointerException e) {
@@ -53,13 +49,21 @@ public class AuthController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
+        if (!user.getUsername().isEmpty()) {
+            if (!user.getPassword().isEmpty()) {
+                if (!user.getEmail().isEmpty()) {
+                    service.saveUser(user);
+                }
+            }
+        }
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/mainpage", method = RequestMethod.GET)
     public String MainPage(Model model) {
-        model.addAttribute("users", service.findAll());
+        model.addAttribute("users");
+
         return "mainpage";
     }
 }

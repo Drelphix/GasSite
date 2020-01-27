@@ -6,6 +6,7 @@
 <body>
 
 <h1>Result</h1>
+<tag th:text="${error}"></tag>
 <tbody>
 <tr th:each="user : ${users}">
     <td th:text="${user.username}"></td>

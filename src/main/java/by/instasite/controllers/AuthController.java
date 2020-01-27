@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -22,8 +23,9 @@ public class AuthController {
     }
 
     @GetMapping(value = "/")
-    public String Login(Model model) {
+    public String Login(Model model, String error) {
         model.addAttribute("user", new User());
+        model.addAttribute("error", error);
         return "login";
     }
 
@@ -34,7 +36,10 @@ public class AuthController {
             User databaseUser = service.getUserByUsername(user.getUsername());
             if (databaseUser.getPassword().equals(user.getPassword())) {
                 return "redirect:/mainpage";
-            } else return "login";
+            } else {
+                model.addAttribute("error", "Введенный логин или пароль неверен");
+                return "login";
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -49,9 +54,8 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String RegistrationSubmit(@ModelAttribute User user, String error, Model model) {
+    public String RegistrationSubmit(@ModelAttribute User user, RedirectAttributes redirectAttributes, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("error", error);
         try {
 
             if (!user.getUsername().isEmpty()) {
@@ -61,24 +65,25 @@ public class AuthController {
                         temp = service.getUserByEmail(user.getEmail());
                         if (temp.getEmail().isEmpty()) {
                             service.saveUser(user);
-                        } else {
-                            error = "Е-мейл занят";
                             return "redirect:/";
+                        } else {
+                            model.addAttribute("message", "Е-мейл занят");
+                            return "register";
                         }
                     }
 
                 } else {
-                    error = "Неверное имя пользователя или пароль";
-                    return "redirect:/";
+                    model.addAttribute("message", "Логин или пароль неверен");
+                    return "register";
                 }
             } else {
-                error = "Введите имя пользователя";
-                return "Е-мейл занят";
+                model.addAttribute("message", "Введите имя пользователя");
+                return "register";
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "register";
     }
 
     @GetMapping(value = "/mainpage")

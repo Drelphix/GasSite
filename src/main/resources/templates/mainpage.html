@@ -6,14 +6,13 @@
 <body>
 
 <h1>Result</h1>
-<tag th:text="${error}"></tag>
+<a th:text="${error}"></a>
 <tbody>
 <tr th:each="user : ${users}">
     <td th:text="${user.username}"></td>
     <td th:text="${user.password}"></td>
     <td th:text="${user.email}"></td>
     <td th:text="${user.country}"></td>
-
 </tbody>
 </body>
 </html>

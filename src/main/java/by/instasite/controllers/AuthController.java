@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class AuthController {
         try {
             User databaseUser = service.getUserByUsername(user.getUsername());
             if (databaseUser.getPassword().equals(user.getPassword())) {
-                return "redirect:/mainpage";
+                return "mainpage";
             } else {
                 model.addAttribute("error", "Введенный логин или пароль неверен");
                 return "login";
@@ -54,37 +53,28 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String RegistrationSubmit(@ModelAttribute User user, RedirectAttributes redirectAttributes, Model model) {
+    public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
+
         try {
-
-            if (!user.getUsername().isEmpty()) {
-                User temp = service.getUserByUsername(user.getUsername());
-                if (!user.getPassword().isEmpty() && !temp.getUsername().equals(user.getUsername())) {
-                    if (!user.getEmail().isEmpty()) {
-                        temp = service.getUserByEmail(user.getEmail());
-                        if (temp.getEmail().isEmpty()) {
-                            service.saveUser(user);
-                            return "redirect:/";
-                        } else {
-                            model.addAttribute("message", "Е-мейл занят");
-                            return "register";
-                        }
-                    }
-
-                } else {
-                    model.addAttribute("message", "Логин или пароль неверен");
-                    return "register";
-                }
-            } else {
-                model.addAttribute("message", "Введите имя пользователя");
+            User userByUsername = service.getUserByUsername(user.getUsername());
+            userByUsername.getUsername();
+            model.addAttribute("message", "Имя пользователя занято");
+            return "register";
+        } catch (NullPointerException tryGetUserByUsername) {
+            try {
+                User userByEmail = service.getUserByEmail(user.getEmail());
+                userByEmail.getEmail();
+                model.addAttribute("message", "E-мейл уже занят");
                 return "register";
+            } catch (NullPointerException tryGetUserByEmail) {
+                tryGetUserByEmail.printStackTrace();
+                service.saveUser(user);
+                return "mainpage";
             }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
         }
-        return "register";
     }
+
 
     @GetMapping(value = "/mainpage")
     public String MainPage(Model model) {

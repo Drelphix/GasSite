@@ -8,8 +8,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(name = "id_login")
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "username")
@@ -17,8 +16,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "country")
     private String country;
 

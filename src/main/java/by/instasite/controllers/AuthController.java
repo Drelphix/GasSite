@@ -53,26 +53,29 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String RegistrationSubmit(@ModelAttribute User user, Model model) {
+    public String RegistrationSubmit(@ModelAttribute User user, @ModelAttribute String repeat, Model model) {
         model.addAttribute("user", user);
-
-        try {
-            User userByUsername = service.getUserByUsername(user.getUsername());
-            userByUsername.getUsername();
-            model.addAttribute("message", "Имя пользователя занято");
-            return "register";
-        } catch (NullPointerException tryGetUserByUsername) {
+        model.addAttribute("repeat", "");
+        if (repeat.equals(user.getPassword())) {
             try {
-                User userByEmail = service.getUserByEmail(user.getEmail());
-                userByEmail.getEmail();
-                model.addAttribute("message", "E-мейл уже занят");
+                User userByUsername = service.getUserByUsername(user.getUsername());
+                userByUsername.getUsername();
+                model.addAttribute("message", "Имя пользователя занято");
                 return "register";
-            } catch (NullPointerException tryGetUserByEmail) {
-                tryGetUserByEmail.printStackTrace();
-                service.saveUser(user);
-                return "mainpage";
+            } catch (NullPointerException tryGetUserByUsername) {
+                try {
+                    User userByEmail = service.getUserByEmail(user.getEmail());
+                    userByEmail.getEmail();
+                    model.addAttribute("message", "E-мейл уже занят");
+                    return "register";
+                } catch (NullPointerException tryGetUserByEmail) {
+                    tryGetUserByEmail.printStackTrace();
+                    service.saveUser(user);
+                    return "mainpage";
+                }
             }
-        }
+        } else model.addAttribute("message", "Пароли не совпадают");
+        return "register";
     }
 
 

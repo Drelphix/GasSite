@@ -5,13 +5,13 @@
     <title>Registration</title>
 </head>
 <body>
-<p th:text="${message}"></p>
 <form class="transparent" action="#" method="post" th:action="@{/register}" th:object="${user}">
     <div class="form-inner">
         <center><h3>Регистрация</h3></center>
+        <p th:text="${message}"></p>
         <p style="color:white">Логин: <input required type="text" th:field="*{username}"/></p>
         <p style="color:white">Пароль: <input  required type="password" th:field="*{password}"/></p>
-        <p style="color:white">Подтвердите пароль: <input required type="password"/></p>
+        <p style="color:white">Подтвердите пароль: <input required th:object="${$repeat}" type="password"/></p>
         <p style="color:white">Email: <input  required type="email" th:field="*{email}"/></p>
         <p><input class="input"  type="submit" value="Зарегистрировать"/> <input type="reset" value="Сбросить"/></p>
     </div>

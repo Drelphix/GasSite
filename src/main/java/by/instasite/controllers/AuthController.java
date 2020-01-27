@@ -36,7 +36,10 @@ public class AuthController {
             User databaseUser = service.getUserByUsername(user.getUsername());
             if (databaseUser.getPassword().equals(user.getPassword())) {
                 return "redirect:/mainpage";
-            } else return "login";
+            } else {
+                model.addAttribute("error", "Введенный логин или пароль неверен");
+                return "login";
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

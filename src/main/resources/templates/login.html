@@ -12,13 +12,16 @@
 
 	<center><h3>Авторизация</h3></center>
 	<p th:text="${error}" />
-	<p>Логин: <input type="text" th:field="*{username}"/></p>
-	<p>Пароль: <input type="password" th:field="*{password}"/></p>
+	<p style="color:white">Логин: <input required type="text" th:field="*{username}"/></p>
+	<p style="color:white">Пароль: <input required type="password" th:field="*{password}"/></p>
 	<p><input class="input" type="submit" value="Войти"/> <input class="inputbutton" type="reset" value="Сбросить"/></p>
-	<form action="#" th:action="@{/register}" method="get">
-		<input class="reginput" type="submit" value="Зарегистироваться" />
-	</form>
 </div>
 </form>
+
+	<form class="transparent" action="#" th:action="@{/register}" method="get">
+		<div class="form-inner">
+		<input class="reginput" type="submit" value="Зарегистироваться" />
+		</div>
+	</form>
 </body>
 </html>

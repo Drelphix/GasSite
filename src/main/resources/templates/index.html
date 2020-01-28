@@ -4,8 +4,12 @@
     <title>InstaSite</title>
 </head>
 <body>
-
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="Sign Out"/>
+</form>
 <h1>Result</h1>
+<p><a href="/login">Авторизация</a></p>
 <a th:text="${error}"></a>
 <tbody>
 <tr th:each="user : ${users}">

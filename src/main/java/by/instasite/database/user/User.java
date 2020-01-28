@@ -23,11 +23,35 @@ public class User {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "role")
+    private String role;
+    @Column(name = "active")
+    private boolean active;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {this.id=id;}
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

@@ -20,8 +20,7 @@ public class AuthController {
     public void setUserService(UserService service) {
         this.service = service;
     }
-
-    @GetMapping(value = "/")
+    @GetMapping(value = "/login")
     public String Login(Model model, String error) {
         model.addAttribute("user", new User());
         model.addAttribute("error", error);
@@ -30,11 +29,10 @@ public class AuthController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String LoginSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
         try {
             User databaseUser = service.getUserByUsername(user.getUsername());
             if (databaseUser.getPassword().equals(user.getPassword())) {
-                return "mainpage";
+                return "index";
             } else {
                 model.addAttribute("error", "Введенный логин или пароль неверен");
                 return "login";
@@ -42,47 +40,42 @@ public class AuthController {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return "register";
-
+        return "registration";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @GetMapping(value = "/registration")
     public String Registration(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        model.addAttribute("repeat", new String());
+        return "registration";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String RegistrationSubmit(@ModelAttribute User user, @ModelAttribute String repeat, Model model) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("repeat", "");
-        if (repeat.equals(user.getPassword())) {
-            try {
-                User userByUsername = service.getUserByUsername(user.getUsername());
-                userByUsername.getUsername();
-                model.addAttribute("message", "Имя пользователя занято");
-                return "register";
-            } catch (NullPointerException tryGetUserByUsername) {
-                try {
-                    User userByEmail = service.getUserByEmail(user.getEmail());
-                    userByEmail.getEmail();
-                    model.addAttribute("message", "E-мейл уже занят");
-                    return "register";
-                } catch (NullPointerException tryGetUserByEmail) {
-                    tryGetUserByEmail.printStackTrace();
-                    service.saveUser(user);
-                    return "mainpage";
-                }
+        User userByUsername = service.getUserByUsername(user.getUsername());
+        if (userByUsername != null) {
+            model.addAttribute("message", "Имя пользователя занято");
+            return "registration";
+        } else {
+            User userByEmail = service.getUserByEmail(user.getEmail());
+            if (userByEmail != null) {
+                model.addAttribute("message", "E-мейл уже занят");
+                return "registration";
+            } else {
+                user.setActive(true);
+                user.setRole("USER");
+                service.saveUser(user);
+                return "redirect:/login";
             }
-        } else model.addAttribute("message", "Пароли не совпадают");
-        return "register";
+        }
     }
 
 
-    @GetMapping(value = "/mainpage")
+    @GetMapping(value = "/")
     public String MainPage(Model model) {
         List<User> users = service.findAll();
         model.addAttribute("users", users);
-        return "mainpage";
+        return "index";
     }
 }

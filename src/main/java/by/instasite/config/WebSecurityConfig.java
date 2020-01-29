@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/resources/**", "/registration").permitAll()
+                .antMatchers("/", "/resources/**", "/registration", "/login").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -30,7 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/admin").hasAnyRole("admin");
     }
 
     @Override

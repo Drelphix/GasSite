@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -30,8 +31,15 @@ public class AuthController {
     @GetMapping(value = "/registration")
     public String Registration(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("repeat", new String());
+        model.addAttribute("repeat", "");
         return "registration";
+    }
+
+    @GetMapping(value = "/login")
+    public String Authorization(Model model, HttpServletRequest httpServletRequest) {
+        if (httpServletRequest.getRemoteUser() == null) {
+            return "login";
+        } else return "redirect:/";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)

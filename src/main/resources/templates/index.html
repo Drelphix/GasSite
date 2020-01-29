@@ -1,4 +1,6 @@
-<html  xmlns:th="http://www.thymeleaf.org">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <link href="css/index.css" rel="stylesheet" type="text/css"/>
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
@@ -33,7 +35,10 @@ function myFunction() {
 <header>
     <div class="header">
         <ul>
-            <li style="float:left"><a class="active">Вы вошли как, [[${#httpServletRequest.remoteUser}]]!</a></li>
+            <li th:if="${#httpServletRequest.remoteUser!=null}">Добро пожаловать,
+                [[${#httpServletRequest.remoteUser}]]
+            </li>
+
             <li><a href="#">Категория</a></li>
             <li><a href="#">Категория 1</a></li>
             <li><a href="#">Категория 2</a></li>
@@ -46,10 +51,13 @@ function myFunction() {
                     <a href="#">Link 3</a>
                 </div>
             </li>
-            <form method="post" th:action="@{/logout}">
-                <li style="float:right"><input class="activebtn" type="submit" value="Выйти"/></li>
+            <form method="post" th:action="@{/logout}" th:if="${#httpServletRequest.remoteUser!=null}">
+                <li style="float:right"><input class="activebtn" method="post" th:action="@{/logout}" type="submit"
+                                               value="Выйти"/></li>
             </form>
-
+            <form method="get" th:action="@{/login}" th:unless="${#httpServletRequest.remoteUser!=null}">
+                <li style="float:right"><input class="activebtn" type="submit" value="Авторизоваться"/></li>
+            </form>
         </ul>
     </div>
 </header>
@@ -60,7 +68,7 @@ function myFunction() {
 
 
 <a th:text="${error}"></a>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+    <input id="myInput" onkeyup="" placeholder="Search for names.." type="text">
 <center><table border="1px" id="myTable">
     <thead>
     <th>User</th><th>Password</th><th>Email</th><th>Country</th>

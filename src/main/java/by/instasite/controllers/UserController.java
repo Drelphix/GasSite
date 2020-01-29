@@ -17,7 +17,6 @@ public class UserController {
 
     @GetMapping(value = "@{username}")
     public String UserAccount(Model model) {
-
         return "user_settings";
     }
 

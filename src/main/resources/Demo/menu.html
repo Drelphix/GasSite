@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" 
+  "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<style>
+.bottomMenu {  
+        width:100%;
+        height: 63px;
+        position:absolute;
+		left:0px;
+		bottom:0px;
+        background: url(images/bgmenu.png) 0px 0px repeat-x;
+ }
+
+#dropdown_nav {
+        font-weight:bold;
+	display:inline-block;
+	list-style:none;
+        border-bottom:0px solid #777;
+	margin-top:18px;
+        }
+
+	#dropdown_nav li {
+                float:left;
+		position:relative;
+		display:inline-block;
+                
+	}
+
+		#dropdown_nav li a {
+         
+                        font-weight:100;
+                        font-size:18px;
+                        color:#fff;
+			padding:15px 22px 20px 22px;
+			background: url(images/linemenu.png) right no-repeat;
+                        -moz-transition: background-color 0.3s 0.01s ease;
+                        -o-transition: background-color 0.3s 0.01s ease;
+                        -webkit-transition: background-color 0.3s 0.01s ease;
+		}
+		#dropdown_nav li a:hover {
+                        background: #000;
+                        text-decoration:none;
+                        color:#0dbfe5;
+			}
+		
+                #dropdown_nav li a.first {
+			-moz-border-radius:5px 0px 0px 5px;
+			-webkit-border-radius:5px 0px 0px 5px;
+		}
+		
+
+		/* Выпадающее меню */
+		#dropdown_nav .sub_nav {
+                        z-index: 4;
+			width:180px;
+			padding:0px;
+			position:absolute;
+			top:42px;
+			left:0px;
+                        border:0px solid #ddd;
+                        border-top:none;
+			background: #000;
+                       }
+
+			#dropdown_nav .sub_nav li {
+                               
+				width:180px;
+				padding:0px;
+			}
+
+				#dropdown_nav .sub_nav li a {
+                                        background: none;
+                                        font-weight: normal;
+                                        font-size:15px;
+					display:block;
+					border-bottom:0px solid #e5e0b3;
+                                        padding-left:10px;
+                                        color:#fff;
+					
+				}
+				#dropdown_nav .sub_nav li a:hover {
+                                        background:#222;
+					color:#0dbfe5;
+					}
+					
+					a {
+  text-decoration:none;
+}
+body{
+font-family: "Segoe UI", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+</style>
+
+</head>
+<body>
+<nav class="bottomMenu">
+	<ul id="dropdown_nav">
+		<a href="#" style="float:left; margin-top:2px; margin-right:25px;"><img src="images/logo.png" width="80px";></a>
+		<li><a href="ASP\frame.html" target="html">Категория</a></li>
+		<li><a href="#">Категория 1</a></li>
+		<li><a href="#">Категория 2</a></li>
+		<li><a href="#">Категория 3</a></li>
+		<li><a href="#">Категория 4</a></li>
+		
+	</ul>
+</nav>
+
+<div class="share-new">
+
+<a class="icon-twitter" href="#" title="Следить в Twitter!" target="_blank"></a>
+<a class="icon-rss" href="#" title="Подписаться на rss"  target="_blank"></a>
+<a class="icon-mail" href="#" title="Подписаться по e-mail"  target="_blank"></a>
+
+</div>
+</body>
+</html>

@@ -1,26 +1,80 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
     <title>InstaSite</title>
+
+    <script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0]; //Тут меняем по какому столбцу ищем
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
 </head>
+
+<header>
+    <div class="header">
+        <ul>
+            <li style="float:left"><a class="active">Вы вошли как, [[${#httpServletRequest.remoteUser}]]!</a></li>
+            <li><a href="#">Категория</a></li>
+            <li><a href="#">Категория 1</a></li>
+            <li><a href="#">Категория 2</a></li>
+            <li><a href="#">Категория 3</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </li>
+            <form method="post" th:action="@{/logout}">
+                <li style="float:right"><input class="activebtn" type="submit" value="Выйти"/></li>
+            </form>
+
+        </ul>
+    </div>
+</header>
+
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Sign Out"/>
-</form>
-<h1>Result</h1>
-<p><a href="/login">Авторизация</a></p>
+<div id="content">
+    <center><h3>Добро пожаловать</h3></center>
+
+
 <a th:text="${error}"></a>
-<tbody>
-<table>
-    <a>Userlist</a>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<center><table border="1px" id="myTable">
+    <thead>
+    <th>User</th><th>Password</th><th>Email</th><th>Country</th>
+    </thead>
+    <tbody>
     <tr th:each="user : ${users}">
         <td th:text="${user.username}"></td>
         <td th:text="${user.password}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.country}"></td>
     </tr>
+    </tbody>
 </table>
-</tbody>
+</center>
+</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package by.instasite.database.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setUserRepository(UserRepository repository) {
@@ -22,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
 
@@ -33,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(String username, String password, String email, String country) {
         User updated = repository.findByUsername(username);
-        updated.setPassword(password);
+        updated.setPassword(passwordEncoder.encode(password));
         updated.setEmail(email);
         updated.setCountry(country);
         repository.save(updated);

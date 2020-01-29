@@ -12,11 +12,15 @@
 <p><a href="/login">Авторизация</a></p>
 <a th:text="${error}"></a>
 <tbody>
-<tr th:each="user : ${users}">
-    <td th:text="${user.username}"></td>
-    <td th:text="${user.password}"></td>
-    <td th:text="${user.email}"></td>
-    <td th:text="${user.country}"></td>
+<table>
+    <a>Userlist</a>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.country}"></td>
+    </tr>
+</table>
 </tbody>
 </body>
 </html>

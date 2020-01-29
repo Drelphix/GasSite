@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
 @Controller
 public class AuthController {
     private UserService service;
@@ -35,13 +32,6 @@ public class AuthController {
         return "registration";
     }
 
-    @GetMapping(value = "/login")
-    public String Authorization(Model model, HttpServletRequest httpServletRequest) {
-        if (httpServletRequest.getRemoteUser() == null) {
-            return "login";
-        } else return "redirect:/";
-    }
-
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String RegistrationSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
@@ -61,13 +51,5 @@ public class AuthController {
                 return "redirect:/login";
             }
         }
-    }
-
-
-    @GetMapping(value = "/")
-    public String MainPage(Model model) {
-        List<User> users = service.findAll();
-        model.addAttribute("users", users);
-        return "index";
     }
 }

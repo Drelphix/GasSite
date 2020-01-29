@@ -15,7 +15,7 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping(value = "@{username}")
+    @GetMapping(value = "/settings")
     public String UserAccount(Model model) {
         return "user_settings";
     }

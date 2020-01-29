@@ -20,27 +20,11 @@ public class AuthController {
     public void setUserService(UserService service) {
         this.service = service;
     }
-    @GetMapping(value = "/login")
-    public String Login(Model model, String error) {
-        model.addAttribute("user", new User());
-        model.addAttribute("error", error);
-        return "login";
-    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String LoginSubmit(@ModelAttribute User user, Model model) {
-        try {
-            User databaseUser = service.getUserByUsername(user.getUsername());
-            if (databaseUser.getPassword().equals(user.getPassword())) {
-                return "index";
-            } else {
-                model.addAttribute("error", "Введенный логин или пароль неверен");
-                return "login";
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return "registration";
+    @GetMapping(value = "/login-error")
+    public String LoginError(Model model) {
+        model.addAttribute("error", "Неверно введен логин или пароль");
+        return "login";
     }
 
     @GetMapping(value = "/registration")

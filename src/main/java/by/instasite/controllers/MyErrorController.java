@@ -17,12 +17,14 @@ public class MyErrorController implements ErrorController {
         if (status != null) {
             Integer statusCode = Integer.valueOf(status.toString());
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "error-404";
+                return "errors/error-404";
+            } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+                return "errors/error-403";
             } else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE.value()) {
-                return "error-503";
+                return "errors/error-503";
             }
         }
-        return "error-500";
+        return "errors/error-500";
     }
     @Override
     public String getErrorPath() {

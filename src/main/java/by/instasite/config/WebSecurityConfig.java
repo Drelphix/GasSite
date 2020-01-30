@@ -23,18 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/resources/**", "/registration").permitAll()
+                .antMatchers("/admin").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login-error")
-                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/admin").hasAnyRole("admin");
+                .logoutSuccessUrl("/");
+
+
     }
 
     @Override

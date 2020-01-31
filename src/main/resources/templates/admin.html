@@ -77,13 +77,13 @@ function myFunction() {
             <th>Country</th>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.password}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.country}"></td>
-                <td th:text="${user.role}"></td>
-                <td th:text="${user.active}"></td>
+            <tr th:each="client : ${users}">
+                <td th:text="${client.username}"></td>
+                <td th:text="${client.password}"></td>
+                <td th:text="${client.email}"></td>
+                <td th:text="${client.country}"></td>
+                <td th:text="${client.role}"></td>
+                <td th:text="${client.active}"></td>
             </tr>
             </tbody>
         </table>

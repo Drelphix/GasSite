@@ -50,7 +50,7 @@ function myFunction() {
                     <a href="#">Link 3</a>
                 </div>
             </li>
-            <div sec:url="/admin">
+            <div sec:authorize-url="/admin">
                 <form method="get" th:action="@{/admin}">
                     <li style="float:right"><input class="activebtn" type="submit" value="Администрирование"/></li>
                 </form>
@@ -84,11 +84,11 @@ function myFunction() {
         <th>User</th><th>Password</th><th>Email</th><th>Country</th>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.country}"></td>
+        <tr th:each="client : ${users}">
+            <td th:text="${client.username}"></td>
+            <td th:text="${client.password}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.country}"></td>
         </tr>
         </tbody>
     </table>

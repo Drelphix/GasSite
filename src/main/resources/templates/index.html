@@ -53,6 +53,9 @@ function myFunction() {
                                                value="Выйти"/></li>
 
             </form>
+            <form method="get" th:action="@{/admin}" th:if="${isAdmin}">
+                <li style="float:right"><input class="activebtn" type="submit" value="Администрирование"/></li>
+            </form>
             <form method="get" th:action="@{/login}" th:unless="${#httpServletRequest.remoteUser!=null}">
                 <li style="float:right"><input class="activebtn" type="submit" value="Авторизоваться"/></li>
             </form>

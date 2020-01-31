@@ -1,4 +1,4 @@
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="css/index.css" rel="stylesheet" type="text/css"/>
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
@@ -53,6 +53,8 @@ function myFunction() {
                                                value="Выйти"/></li>
 
             </form>
+            <div sec:authorize="isAuthenticated()">
+                Authenticated as <span sec:authentication="name"></span></div>
             <form method="get" th:action="@{/admin}" th:if="${isAdmin}">
                 <li style="float:right"><input class="activebtn" type="submit" value="Администрирование"/></li>
             </form>

@@ -33,9 +33,11 @@ function myFunction() {
 <header>
     <div class="header">
         <ul>
-            <li style="float:left" th:action="@{/settings}" th:if="${#httpServletRequest.remoteUser!=null}">
-                <a class="active" id="userlog">Добро пожаловать, [[${#httpServletRequest.remoteUser}]]</a>
-            </li>
+            <div sec:authorize="isAuthenticated()">
+                <li style="float:left" th:action="@{/settings}">
+                    <a class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a>
+                </li>
+            </div>
             <li><a href="#">Категория</a></li>
             <li><a href="#">Категория 1</a></li>
             <li><a href="#">Категория 2</a></li>
@@ -48,19 +50,24 @@ function myFunction() {
                     <a href="#">Link 3</a>
                 </div>
             </li>
-            <form method="post" th:action="@{/logout}" th:if="${#httpServletRequest.remoteUser!=null}">
-                <li style="float:right"><input class="activebtn" method="post" th:action="@{/logout}" type="submit"
-                                               value="Выйти"/></li>
-
-            </form>
+            <div sec:url="/admin">
+                <form method="get" th:action="@{/admin}">
+                    <li style="float:right"><input class="activebtn" type="submit" value="Администрирование"/></li>
+                </form>
+            </div>
             <div sec:authorize="isAuthenticated()">
-                Authenticated as <span sec:authentication="name"></span></div>
-            <form method="get" th:action="@{/admin}" th:if="${isAdmin}">
-                <li style="float:right"><input class="activebtn" type="submit" value="Администрирование"/></li>
-            </form>
-            <form method="get" th:action="@{/login}" th:unless="${#httpServletRequest.remoteUser!=null}">
-                <li style="float:right"><input class="activebtn" type="submit" value="Авторизоваться"/></li>
-            </form>
+                <form method="post" th:action="@{/logout}">
+                    <li style="float:right"><input class="activebtn" method="post" th:action="@{/logout}" type="submit"
+                                                   value="Выйти"/></li>
+
+                </form>
+            </div>
+            <div sec:authorize="!isAuthenticated()">
+                <form method="get" th:action="@{/login}">
+                    <li style="float:right"><input class="activebtn" type="submit" value="Авторизоваться"/></li>
+                </form>
+            </div>
+
         </ul>
     </div>
 </header>

@@ -1,6 +1,7 @@
 package by.instasite.database.client;
 
 import by.instasite.database.discount_card.Card;
+import by.instasite.database.report.Franchise;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface ClientService {
 
     Card getCardById(int id);
 
-    void saveClient(Client client);
+    void saveClient(Franchise franchise, Client client);
 
     void updateClient(int id, String name, String surname, String address, String telephone, int card);
 

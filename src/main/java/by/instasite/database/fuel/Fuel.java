@@ -9,12 +9,11 @@ import javax.persistence.*;
 @Table(name = "Fuel")
 public class Fuel {
     @Id
-    @Column(name = "idFuel")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "idPrice")
     private Price price;
 
 
@@ -31,6 +30,9 @@ public class Fuel {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public Fuel() {
     }
 
     public Fuel(Price price, String fuelName, String description) {

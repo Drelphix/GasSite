@@ -1,5 +1,6 @@
 package by.instasite.database.employee;
 
+import by.instasite.database.gas_station.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.repository = repository;
     }
 
-
     @Override
     public Employee getUserByNameAndSurname(String name, String surname) {
         return repository.findByNameAndSurname(name, surname);
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public void addEmployee(Station station, Employee employee) {
+        employee.setId(station.getId());
         repository.save(employee);
     }
 

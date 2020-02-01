@@ -1,16 +1,18 @@
 package by.instasite.database.client;
 
 import by.instasite.database.discount_card.Card;
+import by.instasite.database.report.Franchise;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "Client")
 public class Client {
     @Id
-    @Column(name = "idClient")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "Name")
@@ -25,9 +27,23 @@ public class Client {
     @Column(name = "Telephone")
     private String telephone;
 
+    @ManyToMany
+    @JoinColumn(name = "id")
+    private Set<Franchise> franchises;
+
     @OneToOne
-    @JoinColumn(name = "Discount_card")
     private Card card;
+
+    public Client() {
+    }
+
+    public Client(String name, String surname, String address, String telephone, Card card) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.telephone = telephone;
+        this.card = card;
+    }
 
     public Card getCard() {
         return card;

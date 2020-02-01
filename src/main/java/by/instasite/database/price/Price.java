@@ -8,12 +8,15 @@ import javax.persistence.*;
 public class Price {
 
     @Id
-    @Column(name = "idPrice")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "Price")
     private double price;
+
+    public Price() {
+    }
 
     public Price(double price) {
         this.price = price;

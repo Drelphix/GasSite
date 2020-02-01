@@ -12,7 +12,7 @@ import java.util.Set;
 public class Station {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "Name")
@@ -23,12 +23,12 @@ public class Station {
 
     @OneToMany
     @ElementCollection
-    @JoinColumn(name = "idEmployee")
+    @JoinColumn(name = "id")
     private Set<Employee> employee;
 
     @OneToMany
     @ElementCollection
-    @JoinColumn(name = "idFuel")
+    @JoinColumn(name = "id")
     private Set<Fuel> fuel;
 
     public Station(String name, String address, Set<Employee> employee, Set<Fuel> fuel) {
@@ -36,6 +36,9 @@ public class Station {
         this.address = address;
         this.employee = employee;
         this.fuel = fuel;
+    }
+
+    public Station() {
     }
 
     public Set<Fuel> getFuel() {

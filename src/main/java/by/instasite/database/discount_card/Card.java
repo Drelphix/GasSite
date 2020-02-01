@@ -4,15 +4,23 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "Discount_card")
+@Table(name = "Discount")
 public class Card {
     @Id
-    @Column(name = "ID_card")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "Discount")
     private int discount;
+
+
+    public Card() {
+    }
+
+    public Card(int discount) {
+        this.discount = discount;
+    }
 
     public int getId() {
         return id;

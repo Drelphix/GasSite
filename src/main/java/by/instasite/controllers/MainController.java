@@ -69,29 +69,40 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String MainPage(Model model) {
+        Card card = new Card(10);
+        cardService.addCard(card);
         Franchise franchise = new Franchise(null, "ООО Лукоил", null);
+
         franchiseService.saveFranchise(franchise);
 
-        Station station = new Station("Лукоил", "пр-т Строителей", null, null);
+        Client client = new Client("Алексей", "Демешко", "Витебск", "+141434324", card, franchise);
+        clientService.saveClient(client);
+        Set<Client> clients = new HashSet<>();
+        clients.add(client);
+        Set<Franchise> franchises = new HashSet<>();
+
+        franchises.add(franchise);
+
+        Station station = new Station("Лукоил", "пр-т Строителей", null, null, franchise);
         Set<Station> stations = new HashSet<>();
         stations.add(station);
         stationService.saveStation(franchise, station);
 
 
-        Employee employee = new Employee("Лешка", "Дешешко", "Витебск", "+37525595959");
-        Employee employee1 = new Employee("Леська", "Юрьевна", "Минск", "+37543242344");
+        Employee employee = new Employee("Лешка", "Дешешко", "Витебск", "+37525595959", station);
+        Employee employee1 = new Employee("Леська", "Юрьевна", "Минск", "+37543242344", station);
         employeeService.addEmployee(station, employee);
         employeeService.addEmployee(station, employee1);
 
-        Fuel fuel = new Fuel(null, "AI-92", "Bred");
-        Fuel fuel1 = new Fuel(null, "AI-95", "Bred");
+        Fuel fuel = new Fuel(null, "AI-92", "Bred", station);
+        Fuel fuel1 = new Fuel(null, "AI-95", "Bred", station);
         fuelService.addFuel(station, fuel);
         fuelService.addFuel(station, fuel1);
 
         Set<Fuel> fuels = new HashSet<>();
 
-        Price price = new Price(10.5);
-        Price price1 = new Price(20.5);
+        Price price = new Price(10.5, fuel);
+        Price price1 = new Price(20.5, fuel1);
         priceService.addPrice(fuel, price);
         priceService.addPrice(fuel, price1);
 
@@ -103,12 +114,6 @@ public class MainController {
         employees.add(employee);
 
 
-        Card card = new Card(10);
-        cardService.addCard(card);
-        Client client = new Client("P.O. Box 559, 2908 Netus Avenue", "Denise", "Joseph", "(030978) 646020, 100", card);
-        clientService.saveClient(client);
-        Set<Client> clients = new HashSet<>();
-        clients.add(client);
 
         return "index";
     }

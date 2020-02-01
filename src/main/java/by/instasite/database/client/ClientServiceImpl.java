@@ -2,6 +2,7 @@ package by.instasite.database.client;
 
 import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,16 @@ public class ClientServiceImpl implements ClientService {
 
     private ClientRepository repository;
     private CardRepository cardRepository;
+
+    @Autowired
+    public void setCardRepository(ClientRepository repository) {
+        this.repository = repository;
+    }
+
+    @Autowired
+    public void setCardService(CardRepository service) {
+        this.cardRepository = service;
+    }
 
     @Override
     public List<Client> getClientByName(String name) {
@@ -35,7 +46,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void saveClient(Client client) {
-        client.setId(client.getCard().getId());
         repository.save(client);
     }
 
@@ -61,4 +71,5 @@ public class ClientServiceImpl implements ClientService {
         List<Client> clients = repository.findAll();
         return clients;
     }
+
 }

@@ -4,14 +4,13 @@ import by.instasite.database.discount_card.Card;
 import by.instasite.database.report.Franchise;
 
 import javax.persistence.*;
-import java.util.Set;
 
 
 @Entity
 @Table(name = "Client")
 public class Client {
     @Id
-    @Column(name = "id")
+    @Column(name = "idClient")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -27,29 +26,24 @@ public class Client {
     @Column(name = "Telephone")
     private String telephone;
 
-    @ManyToMany
-    @JoinColumn(name = "id")
-    private Set<Franchise> franchises;
-
     @OneToOne
+    @JoinColumn(name = "idCard")
     private Card card;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idFranchise")
+    private Franchise franchise;
+
     public Client() {
     }
 
-    public Client(String name, String surname, String address, String telephone, Card card) {
+    public Client(String name, String surname, String address, String telephone, Card card, Franchise franchise) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.telephone = telephone;
         this.card = card;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
+        this.franchise = franchise;
     }
 
     public int getId() {
@@ -92,4 +86,19 @@ public class Client {
         this.telephone = telephone;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
 }

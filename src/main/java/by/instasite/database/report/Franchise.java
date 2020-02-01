@@ -11,26 +11,25 @@ import java.util.Set;
 @Table(name = "Franchise")
 public class Franchise {
     @Id
-    @Column(name = "id")
+    @Column(name = "idFranchise")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private Set<Station> idStation;
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Station> stations;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Client> client;
 
     public Franchise() {
+
     }
 
-    public Franchise(Set<Station> idStation, String name, Set<Client> client) {
-        this.idStation = idStation;
+    public Franchise(Set<Station> stations, String name, Set<Client> client) {
+        this.stations = stations;
         this.name = name;
         this.client = client;
     }
@@ -43,12 +42,12 @@ public class Franchise {
         this.id = id;
     }
 
-    public Set<Station> getIdStation() {
-        return idStation;
+    public Set<Station> getStations() {
+        return stations;
     }
 
-    public void setIdStation(Set<Station> idStation) {
-        this.idStation = idStation;
+    public void setStations(Set<Station> stations) {
+        this.stations = stations;
     }
 
     public String getName() {

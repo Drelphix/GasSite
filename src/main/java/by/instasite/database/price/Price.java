@@ -1,5 +1,7 @@
 package by.instasite.database.price;
 
+import by.instasite.database.fuel.Fuel;
+
 import javax.persistence.*;
 
 
@@ -8,18 +10,23 @@ import javax.persistence.*;
 public class Price {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "idPrice")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "Price")
     private double price;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idFuel")
+    private Fuel fuel;
+
     public Price() {
     }
 
-    public Price(double price) {
+    public Price(double price, Fuel fuel) {
         this.price = price;
+        this.fuel = fuel;
     }
 
     public int getId() {
@@ -34,4 +41,15 @@ public class Price {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Fuel getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(Fuel fuel) {
+        this.fuel = fuel;
+    }
 }

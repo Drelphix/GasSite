@@ -1,5 +1,7 @@
 package by.instasite.database.employee;
 
+import by.instasite.database.gas_station.Station;
+
 import javax.persistence.*;
 
 
@@ -8,7 +10,7 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "idEmployee")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -25,7 +27,20 @@ public class Employee {
     @Column(name = "Telephone")
     private String telephone;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idStation")
+    private Station station;
+
+
     public Employee() {
+    }
+
+    public Employee(String name, String surname, String address, String telephone, Station station) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.telephone = telephone;
+        this.station = station;
     }
 
     public int getId() {
@@ -68,11 +83,11 @@ public class Employee {
         this.telephone = telephone;
     }
 
-    public Employee(String name, String surname, String address, String telephone) {
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.telephone = telephone;
+    public Station getStation() {
+        return station;
     }
 
+    public void setStation(Station station) {
+        this.station = station;
+    }
 }

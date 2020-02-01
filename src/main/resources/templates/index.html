@@ -37,8 +37,8 @@ function myFunction() {
 <nav id="menuVertical">
     <ul>
         <div sec:authorize="isAuthenticated()">
-            <li th:action="@{/settings}">
-                <center><a class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
+            <li>
+                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
             </li>
         </div>
 
@@ -85,12 +85,12 @@ function myFunction() {
     <div class="footer">
         <div sec:authorize="isAuthenticated()">
             <form method="post" th:action="@{/logout}">
-                <input class="activebtnfooter" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
+                <input class="activebtnfooterlog" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
             </form>
         </div>
         <div sec:authorize="!isAuthenticated()">
             <form method="get" th:action="@{/login}">
-                <input class="activebtnfooter" type="submit" value="Авторизоваться"/>
+                <input class="activebtnfooterauth" type="submit" value="Авторизоваться"/>
             </form>
         </div>
     </div>

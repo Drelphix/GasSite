@@ -67,8 +67,8 @@
 </div>
 
 <div id="content">
-    <center><h3>Добавление нового клиента</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addclient}">
+    <center><h3>Добавление дисконтной карты</h3></center>
+    <form action="#" class="transparent" method="post" th:action="@{/addemployee}">
     <div class="form-inner">
     <a th:text="${error}"></a>
     <center>
@@ -76,7 +76,10 @@
             <p><input required  type="text" placeholder="Фамилия"></p>
             <p><input required  type="text" placeholder="Адрес"></p>
             <p><input required  type="tel" placeholder="Телефон"></p>
-            <p><input required  type="text" placeholder="Дисконтная карта"></p>
+            <p><select th:each="user : ${idStation}">
+                <option th:value="${id}"></option>
+               </select>
+            </p>
 
         <form action="#" class="transparent" method="post" th:action="@{/login}">
             <div class="form-inner">

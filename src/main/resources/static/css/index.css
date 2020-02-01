@@ -65,15 +65,25 @@ header {
     margin-left: 18px;
 }
 
-.activebtnfooter{
-    background-color: #ff0000;
-        color: white;
-        text-align: center;
-        padding: 17px 62px;
-        text-decoration: none;
-        border: 0;
-        margin-bottom: 5px;
-}
+.activebtnfooterauth{
+     background-color: #ff0000;
+         color: white;
+         text-align: center;
+         padding: 17px 33px;
+         text-decoration: none;
+         border: 0;
+         margin-bottom: 5px;
+ }
+
+ .activebtnfooterlog{
+    background-color: #006600;
+    color: white;
+    text-align: center;
+    padding: 17px 16px;
+    text-decoration: none;
+    border: 0;
+    width: 160px;
+ }
 
 .form-inner input {
 	display: block;

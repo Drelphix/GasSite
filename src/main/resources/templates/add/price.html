@@ -13,7 +13,8 @@
     <ul>
         <div sec:authorize="isAuthenticated()">
             <li>
-                <center><a th:href="@{/settings}"  class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
+                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span
+                        sec:authentication="name"></span></a></center>
             </li>
         </div>
 
@@ -67,31 +68,33 @@
 </div>
 
 <div id="content">
-    <center><h3>Добавление нового клиента</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addclient}">
-    <div class="form-inner">
-    <a th:text="${error}"></a>
-    <center>
-            <p><input required  type="text" placeholder="Имя"></p>
-            <p><input required  type="text" placeholder="Фамилия"></p>
-            <p><input required  type="text" placeholder="Адрес"></p>
-            <p><input required  type="tel" placeholder="Телефон"></p>
-            <p><input required  type="text" placeholder="Дисконтная карта"></p>
+    <center><h3>Добавление дисконтной карты</h3></center>
+    <form action="#" class="transparent" method="post" th:action="@{/addprice}">
+        <div class="form-inner">
+            <a th:text="${error}"></a>
+            <center>
+                <p><input required type="text" placeholder="Цена"></p>
+                <p><textarea name="description" cols="40" rows="3"></textarea></p>
+                <p>
+                    <select th:each="user : ${idFuel}">
+                        <option th:value="${id}"></option>
+                    </select>
+                </p>
 
-        <form action="#" class="transparent" method="post" th:action="@{/login}">
-            <div class="form-inner">
-                <input class="input" type="submit" value="Войти"/>
-            </div>
-        </form>
+                <form action="#" class="transparent" method="post" th:action="@{/login}">
+                    <div class="form-inner">
+                        <input class="input" type="submit" value="Войти"/>
+                    </div>
+                </form>
 
-            <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.country}"></td>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.country}"></td>
 
-    </center>
-    </div>
+            </center>
+        </div>
     </form>
 </div>
 </body>

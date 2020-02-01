@@ -25,8 +25,8 @@ public class Report {
     @JoinColumn(name = "idFuel")
     private Set<Fuel> fuel;
 
-    @Column(name = "fuelingDate")
-    private String fuelingDate;
+    @Column(name = "name")
+    private String name;
 
     @OneToMany
     @JoinColumn(name = "idEmployee")

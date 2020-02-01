@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface StationService {
     Station getStationByAddress(String address);
-
     List<Station> getStationsByName(String name);
 
     void saveStation(Station station);

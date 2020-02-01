@@ -59,7 +59,6 @@ function myFunction() {
                 <form method="post" th:action="@{/logout}">
                     <li style="float:right"><input class="activebtn" method="post" th:action="@{/logout}" type="submit"
                                                    value="Выйти"/></li>
-
                 </form>
             </div>
             <div sec:authorize="!isAuthenticated()">
@@ -84,11 +83,11 @@ function myFunction() {
         <th>User</th><th>Password</th><th>Email</th><th>Country</th>
         </thead>
         <tbody>
-        <tr th:each="client : ${users}">
-            <td th:text="${client.username}"></td>
-            <td th:text="${client.password}"></td>
-            <td th:text="${client.email}"></td>
-            <td th:text="${client.country}"></td>
+        <tr th:each="station : ${stations}">
+            <td th:text="${station.name}"></td>
+            <td th:text="${station.}"></td>
+            <td th:text="${station.}"></td>
+            <td th:text="${station.}"></td>
         </tr>
         </tbody>
     </table>

@@ -1,5 +1,7 @@
 package by.instasite.database.fuel;
 
+import by.instasite.database.price.Price;
+
 import javax.persistence.*;
 
 
@@ -11,12 +13,25 @@ public class Fuel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @OneToOne
+    @JoinColumn(name = "idPrice")
+    private Price price;
+
+
     @Column(name = "Name")
     private String fuelName;
 
     @Column(name = "Description")
     private String description;
 
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 
     public int getId() {
         return id;

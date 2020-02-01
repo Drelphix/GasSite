@@ -1,16 +1,26 @@
 package by.instasite.controllers;
 
+import by.instasite.database.client.Client;
 import by.instasite.database.client.ClientService;
+import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardService;
+import by.instasite.database.employee.Employee;
 import by.instasite.database.employee.EmployeeService;
+import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
+import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
+import by.instasite.database.price.Price;
 import by.instasite.database.price.PriceService;
+import by.instasite.database.report.Franchise;
 import by.instasite.database.report.FranchiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -59,6 +69,46 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String MainPage(Model model) {
+        Franchise franchise = new Franchise(null, "ООО Лукоил", null);
+        franchiseService.saveFranchise(franchise);
+
+        Station station = new Station("Лукоил", "пр-т Строителей", null, null);
+        Set<Station> stations = new HashSet<>();
+        stations.add(station);
+        stationService.saveStation(franchise, station);
+
+
+        Employee employee = new Employee("Лешка", "Дешешко", "Витебск", "+37525595959");
+        Employee employee1 = new Employee("Леська", "Юрьевна", "Минск", "+37543242344");
+        employeeService.addEmployee(station, employee);
+        employeeService.addEmployee(station, employee1);
+
+        Fuel fuel = new Fuel(null, "AI-92", "Bred");
+        Fuel fuel1 = new Fuel(null, "AI-95", "Bred");
+        fuelService.addFuel(station, fuel);
+        fuelService.addFuel(station, fuel1);
+
+        Set<Fuel> fuels = new HashSet<>();
+
+        Price price = new Price(10.5);
+        Price price1 = new Price(20.5);
+        priceService.addPrice(fuel, price);
+        priceService.addPrice(fuel, price1);
+
+        fuels.add(fuel);
+        fuels.add(fuel1);
+
+        Set<Employee> employees = new HashSet<>();
+        employees.add(employee1);
+        employees.add(employee);
+
+
+        Card card = new Card(10);
+        cardService.addCard(card);
+        Client client = new Client("P.O. Box 559, 2908 Netus Avenue", "Denise", "Joseph", "(030978) 646020, 100", card);
+        clientService.saveClient(client);
+        Set<Client> clients = new HashSet<>();
+        clients.add(client);
 
         return "index";
     }

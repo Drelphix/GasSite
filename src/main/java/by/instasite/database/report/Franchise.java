@@ -23,6 +23,7 @@ public class Franchise {
     private String name;
 
     @ManyToMany
+    @JoinColumn(name = "id")
     private Set<Client> client;
 
     public Franchise() {

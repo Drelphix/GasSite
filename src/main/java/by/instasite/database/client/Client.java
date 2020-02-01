@@ -28,11 +28,11 @@ public class Client {
     private String telephone;
 
     @ManyToMany
+    @JoinColumn(name = "id")
     private Set<Franchise> franchises;
 
     @OneToOne
     private Card card;
-
     public Client() {
     }
 

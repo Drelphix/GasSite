@@ -15,8 +15,23 @@ public class Fuel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "fuel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Price> price;
+    public Fuel(Price price, String fuelName, String description, Station station) {
+        this.price = price;
+        this.fuelName = fuelName;
+        this.description = description;
+        this.station = station;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+    @OneToOne(mappedBy = "fuel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Price price;
 
     @Column(name = "Name")
     private String fuelName;
@@ -28,30 +43,12 @@ public class Fuel {
     @JoinColumn(name = "idStation")
     private Station station;
 
-    public Fuel() {
-    }
-
-    public Fuel(Set<Price> price, String fuelName, String description, Station station) {
-        this.price = price;
-        this.fuelName = fuelName;
-        this.description = description;
-        this.station = station;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<Price> getPrice() {
-        return price;
-    }
-
-    public void setPrice(Set<Price> price) {
-        this.price = price;
     }
 
     public String getFuelName() {

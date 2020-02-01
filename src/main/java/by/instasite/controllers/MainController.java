@@ -114,7 +114,7 @@ public class MainController {
         employees.add(employee);
 
 
-
+        model.containsAttribute("users");
         return "index";
     }
 

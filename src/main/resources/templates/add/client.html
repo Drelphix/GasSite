@@ -1,36 +1,11 @@
 <html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="C:\Users\Вячеслав\IdeaProjects\instasite\src\main\resources\static\css\index.css" rel="stylesheet" type="text/css"/>
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
     <title>InstaSite</title>
 
-    <script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0]; //Тут меняем по какому столбцу ищем
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-
 </head>
-
-<body>
 
 <body>
 
@@ -88,34 +63,36 @@ function myFunction() {
                 <input class="activebtnfooter" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
             </form>
         </div>
-        <div sec:authorize="!isAuthenticated()">
-            <form method="get" th:action="@{/login}">
-                <input class="activebtnfooter" type="submit" value="Авторизоваться"/>
-            </form>
-        </div>
     </div>
 </div>
 
 <div id="content">
-    <center><h3>Добро пожаловать</h3></center>
-
-
+    <center><h3>Добавление нового клиента</h3></center>
+    <form action="#" class="transparent" method="post" th:action="@{/addclient}">
+    <div class="form-inner">
     <a th:text="${error}"></a>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-    <center><table border="1px" id="myTable">
-        <thead>
-        <th>User</th><th>Password</th><th>Email</th><th>Country</th>
-        </thead>
-        <tbody>
-        <tr th:each="station : ${stations}">
-            <td th:text="${station.name}"></td>
-            <td th:text="${station.}"></td>
-            <td th:text="${station.}"></td>
-            <td th:text="${station.}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <center>
+            <p><input required  type="text" placeholder="Имя"></p>
+            <p><input required  type="text" placeholder="Фамилия"></p>
+            <p><input required  type="text" placeholder="Адрес"></p>
+            <p><input required  type="tel" placeholder="Телефон"></p>
+            <p><input required  type="text" placeholder="Дисконтная карта"></p>
+
+        <form action="#" class="transparent" method="post" th:action="@{/login}">
+            <div class="form-inner">
+                <input class="input" type="submit" value="Войти"/>
+            </div>
+        </form>
+
+            <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.country}"></td>
+
     </center>
+    </div>
+    </form>
 </div>
 </body>
 </html>

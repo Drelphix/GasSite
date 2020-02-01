@@ -17,7 +17,7 @@ public class Price {
     @Column(name = "Price")
     private double price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFuel")
     private Fuel fuel;
 

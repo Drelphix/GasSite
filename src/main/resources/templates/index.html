@@ -110,13 +110,15 @@ function myFunction() {
         </thead>
         <tbody>
         <tr th:each="franchise : ${franchises}">
-            <td th:text="${list.name}"></td>
-            <td th:each="station:${stations}"></td>
+            <td th:text="${franchise.name}"></td>
+            <td th:text="${franchise.stations}"></td>
+
+            <td th:each="station:${franchise}"></td>
             <td th:text="${station.name}"></td>
             <td th:text="${station.address}"></td>
-            <td th:each="fuel :{fuels}"></td>
+            <td th:each="fuel :{station}"></td>
             <td th:text="${fuel.name}"></td>
-            <td th:text="${price.price}"></td>
+            <td th:text="${fuel.price}"></td>
         </tr>
         </tbody>
     </table>

@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -69,12 +70,13 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String ShowMainPage(Model model) {
+        List<Franchise> franchises = franchiseService.findAll();
+        model.addAttribute("franchises", franchises);
         return "index";
     }
 
     @GetMapping(value = "/client")
     public String ShowClientTable(Model model) {
-        model.addAttribute("users");
         return "index";
     }
 

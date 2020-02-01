@@ -23,12 +23,10 @@ public class Station {
 
     @OneToMany
     @ElementCollection
-    @JoinColumn(name = "id")
     private Set<Employee> employee;
 
     @OneToMany
     @ElementCollection
-    @JoinColumn(name = "id")
     private Set<Fuel> fuel;
 
     public Station(String name, String address, Set<Employee> employee, Set<Fuel> fuel) {

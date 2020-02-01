@@ -1,6 +1,5 @@
 package by.instasite.database.fuel;
 
-import by.instasite.database.gas_station.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,7 @@ public class FuelServiceImpl implements FuelService {
     }
 
     @Override
-    public void addFuel(Station station, Fuel fuel) {
-        fuel.setId(station.getId());
+    public void addFuel(Fuel fuel) {
         repository.save(fuel);
     }
 

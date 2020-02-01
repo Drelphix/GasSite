@@ -2,7 +2,6 @@ package by.instasite.database.client;
 
 import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardRepository;
-import by.instasite.database.report.Franchise;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void saveClient(Franchise franchise, Client client) {
+    public void saveClient(Client client) {
         repository.save(client);
     }
 

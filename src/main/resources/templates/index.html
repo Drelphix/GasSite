@@ -104,14 +104,19 @@ function myFunction() {
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
     <center><table border="1px" id="myTable">
         <thead>
-        <th>User</th><th>Password</th><th>Email</th><th>Country</th>
+        <th th:each="table: ${tables}">
+        <th th:text="table.name"></th>
+        </th>
         </thead>
         <tbody>
-        <tr th:each="station : ${stations}">
+        <tr th:each="franchise : ${franchises}">
+            <td th:text="${list.name}"></td>
+            <td th:each="station:${stations}"></td>
             <td th:text="${station.name}"></td>
-            <td th:text="${station.}"></td>
-            <td th:text="${station.}"></td>
-            <td th:text="${station.}"></td>
+            <td th:text="${station.address}"></td>
+            <td th:each="fuel :{fuels}"></td>
+            <td th:text="${fuel.name}"></td>
+            <td th:text="${price.price}"></td>
         </tr>
         </tbody>
     </table>

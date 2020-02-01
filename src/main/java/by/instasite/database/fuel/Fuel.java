@@ -4,7 +4,6 @@ import by.instasite.database.gas_station.Station;
 import by.instasite.database.price.Price;
 
 import javax.persistence.*;
-import java.util.Set;
 
 
 @Entity
@@ -14,6 +13,22 @@ public class Fuel {
     @Column(name = "idFuel")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToOne(mappedBy = "fuel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Price price;
+
+    @Column(name = "Name")
+    private String fuelName;
+
+    @Column(name = "Description")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idStation")
+    private Station station;
+
+    public Fuel() {
+    }
 
     public Fuel(Price price, String fuelName, String description, Station station) {
         this.price = price;
@@ -29,19 +44,6 @@ public class Fuel {
     public void setPrice(Price price) {
         this.price = price;
     }
-
-    @OneToOne(mappedBy = "fuel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Price price;
-
-    @Column(name = "Name")
-    private String fuelName;
-
-    @Column(name = "Description")
-    private String description;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idStation")
-    private Station station;
 
     public int getId() {
         return id;

@@ -68,7 +68,43 @@ public class MainController {
     }
 
     @GetMapping(value = "/")
-    public String MainPage(Model model) {
+    public String ShowMainPage(Model model) {
+        return "index";
+    }
+
+    @GetMapping(value = "/client")
+    public String ShowClientTable(Model model) {
+        model.addAttribute("users");
+        return "index";
+    }
+
+    @GetMapping(value = "/fuel")
+    public String ShowFuelTable(Model model) {
+        model.addAttribute("users");
+        return "index";
+    }
+
+    @GetMapping(value = "/price")
+    public String ShowPriceTable(Model model) {
+        model.addAttribute("users");
+        return "index";
+    }
+
+    @GetMapping(value = "/employee")
+    public String ShowEmployeeTable(Model model) {
+        model.addAttribute("users");
+        return "index";
+    }
+
+    @GetMapping(value = "/franchise")
+    public String ShowFranchiseTable(Model model) {
+        model.addAttribute("users");
+        return "index";
+    }
+
+
+    @GetMapping(value = "/test")
+    public String addNewPage(Model model) {
         Card card = new Card(10);
         cardService.addCard(card);
         Franchise franchise = new Franchise(null, "ООО Лукоил", null);
@@ -112,15 +148,6 @@ public class MainController {
         Set<Employee> employees = new HashSet<>();
         employees.add(employee1);
         employees.add(employee);
-
-
-        model.containsAttribute("users");
-        return "index";
-    }
-
-    @GetMapping(value = "/add")
-    public String addNewPage(Model model) {
-
         return "index";
     }
 }

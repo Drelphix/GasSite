@@ -1,13 +1,19 @@
 package by.instasite.controllers;
 
 import by.instasite.database.employee.EmployeeService;
+import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
 import by.instasite.database.gas_station.StationService;
+import by.instasite.database.price.Price;
 import by.instasite.database.price.PriceService;
+import by.instasite.database.report.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -43,7 +49,17 @@ public class MainController {
 
     @GetMapping(value = "/add")
     public String addNewPage(Model model) {
+        Report report = new Report();
+        Set<Fuel> fuels = new HashSet<>();
+        Fuel fuel = new Fuel();
+        Price price = new Price();
 
+        price.setPrice(10.5);
+        priceService.addPrice(price);
+        fuel.setPrice(price);
+
+
+        report.setClient();
         return "index";
     }
 }

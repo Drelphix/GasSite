@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Employee")
 public class Employee {
+
     @Id
     @Column(name = "idEmployee")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,6 +61,13 @@ public class Employee {
     }
 
     public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public Employee(String name, String surname, String address, String telephone) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
         this.telephone = telephone;
     }
 

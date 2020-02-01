@@ -31,6 +31,13 @@ public class Station {
     @JoinColumn(name = "idFuel")
     private Set<Fuel> fuel;
 
+    public Station(String name, String address, Set<Employee> employee, Set<Fuel> fuel) {
+        this.name = name;
+        this.address = address;
+        this.employee = employee;
+        this.fuel = fuel;
+    }
+
     public Set<Fuel> getFuel() {
         return fuel;
     }

@@ -33,6 +33,12 @@ public class Fuel {
         this.price = price;
     }
 
+    public Fuel(Price price, String fuelName, String description) {
+        this.price = price;
+        this.fuelName = fuelName;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }

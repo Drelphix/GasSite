@@ -15,6 +15,10 @@ public class Price {
     @Column(name = "Price")
     private double price;
 
+    public Price(double price) {
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -27,7 +31,4 @@ public class Price {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

@@ -1,30 +1,40 @@
 package by.instasite.database.report;
 
+import by.instasite.database.client.Client;
+import by.instasite.database.employee.Employee;
+import by.instasite.database.fuel.Fuel;
+import by.instasite.database.gas_station.Station;
+
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "Report")
 public class Report {
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "ID_Zapravka")
-    private int idStation;
+    @OneToMany
+    @JoinColumn(name = "idStation")
+    private Set<Station> idStation;
 
-    @Column(name = "Fuel")
-    private int idFuel;
+    @OneToMany
+    @JoinColumn(name = "idFuel")
+    private Set<Fuel> fuel;
 
-    @Column(name = "Fueling_date")
+    @Column(name = "fuelingDate")
     private String fuelingDate;
 
-    @Column(name = "Employee")
-    private int idEmployee;
+    @OneToMany
+    @JoinColumn(name = "idEmployee")
+    private Set<Employee> employee;
 
-    @Column(name = "Client")
-    private int idClient;
+    @OneToMany
+    @JoinColumn(name = "idClient")
+    private Set<Client> client;
 
 
 }

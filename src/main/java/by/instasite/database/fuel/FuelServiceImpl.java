@@ -31,7 +31,6 @@ public class FuelServiceImpl implements FuelService {
         Fuel updated = repository.getOne(id);
         updated.setFuelName(fuelName);
         updated.setDescription(description);
-        updated.setPrice(price);
         repository.save(updated);
     }
 

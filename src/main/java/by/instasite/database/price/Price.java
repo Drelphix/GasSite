@@ -1,6 +1,10 @@
 package by.instasite.database.price;
 
+import by.instasite.database.fuel.Fuel;
+import by.instasite.database.gas_station.Station;
+
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -8,15 +12,17 @@ import javax.persistence.*;
 public class Price {
 
     @Id
-    @Column(name = "ID_Price")
+    @Column(name = "idPrice")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "ID_Zapravka")
-    private int idStation;
+    @OneToMany
+    @JoinColumn(name = "idStation")
+    private Set<Station> idStation;
 
-    @Column(name = "ID_Fuel")
-    private int idFuel;
+    @OneToOne
+    @JoinColumn(name = "idFuel")
+    private Fuel idFuel;
 
     @Column(name = "Price")
     private double price;
@@ -29,19 +35,19 @@ public class Price {
         this.id = id;
     }
 
-    public int getIdStation() {
+    public Set<Station> getIdStation() {
         return idStation;
     }
 
-    public void setIdStation(int idStation) {
+    public void setIdStation(Set<Station> idStation) {
         this.idStation = idStation;
     }
 
-    public int getIdFuel() {
+    public Fuel getIdFuel() {
         return idFuel;
     }
 
-    public void setIdFuel(int idFuel) {
+    public void setIdFuel(Fuel idFuel) {
         this.idFuel = idFuel;
     }
 

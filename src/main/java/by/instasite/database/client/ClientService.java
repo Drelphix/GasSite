@@ -1,5 +1,7 @@
 package by.instasite.database.client;
 
+import by.instasite.database.discount_card.Card;
+
 import java.util.List;
 
 public interface ClientService {
@@ -9,7 +11,7 @@ public interface ClientService {
 
     Client getClientByCard(int card);
 
-    int getCardById(int id);
+    Card getCardById(int id);
 
     void saveClient(Client client);
 

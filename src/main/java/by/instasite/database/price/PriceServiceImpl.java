@@ -10,9 +10,9 @@ public class PriceServiceImpl implements PriceService {
 
     private PriceRepository repository;
 
-    @Override
-    public Price getPriceById(int id) {
-        return null;
+    @Autowired
+    public void setPriceRepository(PriceRepository repository) {
+        this.repository = repository;
     }
 
     @Override
@@ -20,14 +20,6 @@ public class PriceServiceImpl implements PriceService {
         repository.save(price);
     }
 
-    @Override
-    public void updatePrice(int id, int idStation, int idFuel, double price) {
-        Price updated = repository.getOne(id);
-        updated.setIdStation(idStation);
-        updated.setIdFuel(idFuel);
-        updated.setPrice(price);
-        repository.save(updated);
-    }
 
     @Override
     public void deletePrice(int id) {

@@ -7,18 +7,16 @@ import javax.persistence.*;
 @Table(name = "Fuel")
 public class Fuel {
     @Id
-    @Column(name = "ID_Fuel")
+    @Column(name = "idFuel")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Fuel_Name")
+    @Column(name = "Name")
     private String fuelName;
 
-    @Column(name = "Description_Fuel")
+    @Column(name = "Description")
     private String description;
 
-    @Column(name = "Price")
-    private double price;
 
     public int getId() {
         return id;
@@ -44,11 +42,4 @@ public class Fuel {
         this.description = description;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }

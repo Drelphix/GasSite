@@ -1,8 +1,10 @@
 package by.instasite.database.gas_station;
 
 import by.instasite.database.employee.Employee;
+import by.instasite.database.fuel.Fuel;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -20,18 +22,28 @@ public class Station {
     private String address;
 
     @OneToMany
-    @JoinColumn(name = "idStation")
-    private Employee employee;
+    @ElementCollection
+    @JoinColumn(name = "idEmployee")
+    private Set<Employee> employee;
 
     @OneToMany
-    @JoinColumn(name = "idStation")
-    private Employee employee;
+    @ElementCollection
+    @JoinColumn(name = "idFuel")
+    private Set<Fuel> fuel;
 
-    public Employee getEmployee() {
+    public Set<Fuel> getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(Set<Fuel> fuel) {
+        this.fuel = fuel;
+    }
+
+    public Set<Employee> getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(Set<Employee> employee) {
         this.employee = employee;
     }
 

@@ -9,7 +9,6 @@ public interface PriceService {
 
     void addPrice(Fuel fuel, Price price);
 
-
     void deletePrice(int id);
 
     List<Price> findAll();

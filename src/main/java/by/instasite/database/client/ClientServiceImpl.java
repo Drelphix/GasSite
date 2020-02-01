@@ -35,6 +35,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void saveClient(Client client) {
+        client.setId(client.getCard().getId());
         repository.save(client);
     }
 

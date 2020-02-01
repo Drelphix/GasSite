@@ -1,5 +1,6 @@
 package by.instasite.database.price;
 
+import by.instasite.database.fuel.Fuel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void addPrice(Price price) {
+    public void addPrice(Fuel fuel, Price price) {
+        price.setId(fuel.getId());
         repository.save(price);
     }
 

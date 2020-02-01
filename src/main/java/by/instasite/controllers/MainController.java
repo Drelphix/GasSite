@@ -75,25 +75,25 @@ public class MainController {
         Station station = new Station("Лукоил", "пр-т Строителей", null, null);
         Set<Station> stations = new HashSet<>();
         stations.add(station);
-        stationService.saveStation(station);
+        stationService.saveStation(franchise, station);
 
 
         Employee employee = new Employee("Лешка", "Дешешко", "Витебск", "+37525595959");
         Employee employee1 = new Employee("Леська", "Юрьевна", "Минск", "+37543242344");
-        employeeService.addEmployee(employee);
-        employeeService.addEmployee(employee1);
+        employeeService.addEmployee(station, employee);
+        employeeService.addEmployee(station, employee1);
 
         Fuel fuel = new Fuel(null, "AI-92", "Bred");
         Fuel fuel1 = new Fuel(null, "AI-95", "Bred");
-        fuelService.addFuel(fuel);
-        fuelService.addFuel(fuel1);
+        fuelService.addFuel(station, fuel);
+        fuelService.addFuel(station, fuel1);
 
         Set<Fuel> fuels = new HashSet<>();
 
         Price price = new Price(10.5);
         Price price1 = new Price(20.5);
-        priceService.addPrice(price);
-        priceService.addPrice(price1);
+        priceService.addPrice(fuel, price);
+        priceService.addPrice(fuel, price1);
 
         fuels.add(fuel);
         fuels.add(fuel1);
@@ -106,7 +106,7 @@ public class MainController {
         Card card = new Card(10);
         cardService.addCard(card);
         Client client = new Client("P.O. Box 559, 2908 Netus Avenue", "Denise", "Joseph", "(030978) 646020, 100", card);
-        //clientService.saveClient(client);
+        clientService.saveClient(franchise, client);
         Set<Client> clients = new HashSet<>();
         clients.add(client);
 

@@ -1,4 +1,4 @@
-package by.instasite.database.report;
+package by.instasite.database.franchise;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package by.instasite.database.gas_station;
 
-import by.instasite.database.report.Franchise;
+import by.instasite.database.franchise.Franchise;
 
 import java.util.List;
 

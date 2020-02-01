@@ -1,4 +1,4 @@
-package by.instasite.database.report;
+package by.instasite.database.franchise;
 
 import by.instasite.database.client.Client;
 import by.instasite.database.gas_station.Station;
@@ -65,4 +65,5 @@ public class Franchise {
     public void setClient(Set<Client> client) {
         this.client = client;
     }
+
 }

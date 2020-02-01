@@ -17,6 +17,11 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
+    public Price getOne(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void addPrice(Fuel fuel, Price price) {
         price.setId(fuel.getId());
         repository.saveAndFlush(price);

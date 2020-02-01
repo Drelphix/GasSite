@@ -1,7 +1,7 @@
 package by.instasite.database.client;
 
 import by.instasite.database.discount_card.Card;
-import by.instasite.database.report.Franchise;
+import by.instasite.database.franchise.Franchise;
 
 import javax.persistence.*;
 

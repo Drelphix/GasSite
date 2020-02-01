@@ -1,8 +1,8 @@
 package by.instasite.database.gas_station;
 
 import by.instasite.database.employee.Employee;
+import by.instasite.database.franchise.Franchise;
 import by.instasite.database.fuel.Fuel;
-import by.instasite.database.report.Franchise;
 
 import javax.persistence.*;
 import java.util.Set;

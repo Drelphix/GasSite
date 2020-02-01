@@ -6,21 +6,22 @@ import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardService;
 import by.instasite.database.employee.Employee;
 import by.instasite.database.employee.EmployeeService;
+import by.instasite.database.franchise.Franchise;
+import by.instasite.database.franchise.FranchiseService;
 import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
 import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
 import by.instasite.database.price.Price;
 import by.instasite.database.price.PriceService;
-import by.instasite.database.report.Franchise;
-import by.instasite.database.report.FranchiseService;
+import by.instasite.tableviews.MainView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -70,8 +71,16 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String ShowMainPage(Model model) {
-        List<Franchise> franchises = franchiseService.findAll();
-        model.addAttribute("franchises", franchises);
+        ArrayList<MainView> mainViews = new ArrayList<MainView>();
+        for (Franchise franchise : franchiseService.findAll()) {
+            for (Station station : franchise.getStations()) {
+                for (Fuel fuel : station.getFuel()) {
+                    MainView mainView = new MainView(franchise.getName(), station.getName(), station.getAddress(), fuel.getFuelName(), fuel.getPrice().getPrice());
+                    mainViews.add(mainView);
+                }
+            }
+        }
+        model.addAttribute("rows", mainViews);
         return "index";
     }
 

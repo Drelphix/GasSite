@@ -10,9 +10,7 @@ import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
 import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
-import by.instasite.database.price.PriceService;
 import by.instasite.tableviews.MainView;
-import by.instasite.tableviews.PriceView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,6 @@ public class MainController {
     private StationService stationService;
     private EmployeeService employeeService;
     private FuelService fuelService;
-    private PriceService priceService;
     private CardService cardService;
     private ClientService clientService;
     private FranchiseService franchiseService;
@@ -61,10 +58,6 @@ public class MainController {
         this.clientService = service;
     }
 
-    @Autowired
-    public void setPriceService(PriceService service) {
-        this.priceService = service;
-    }
 
     @GetMapping(value = "/")
     public String ShowMainPage(Model model) {
@@ -72,7 +65,7 @@ public class MainController {
         for (Franchise franchise : franchiseService.findAll()) {
             for (Station station : franchise.getStations()) {
                 for (Fuel fuel : station.getFuel()) {
-                    MainView mainView = new MainView(franchise.getName(), station.getName(), station.getAddress(), fuel.getFuelName(), fuel.getPrice().getPrice());
+                    MainView mainView = new MainView(franchise.getName(), station.getName(), station.getAddress(), fuel.getFuelName(), fuel.getPrice());
                     mainViews.add(mainView);
                 }
             }
@@ -91,16 +84,7 @@ public class MainController {
 
     @GetMapping(value = "/price")
     public String ShowFuelTable(Model model) {
-        List<PriceView> priceViewList = new ArrayList<>();
-        for (Fuel fuel : fuelService.findAll()) {
-            try {
-                PriceView priceView = new PriceView(fuel.getFuelName(), fuel.getDescription(), fuel.getPrice().getPrice());
-                priceViewList.add(priceView);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-        }
-        model.addAttribute("fuels", priceViewList);
+        model.addAttribute("fuels", fuelService.findAll());
         return "index";
     }
 

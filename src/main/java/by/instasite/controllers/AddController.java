@@ -12,8 +12,6 @@ import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
 import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
-import by.instasite.database.price.Price;
-import by.instasite.database.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,7 @@ public class AddController {
     private StationService stationService;
     private EmployeeService employeeService;
     private FuelService fuelService;
-    private PriceService priceService;
+
     private CardService cardService;
     private ClientService clientService;
     private FranchiseService franchiseService;
@@ -61,10 +59,6 @@ public class AddController {
         this.clientService = service;
     }
 
-    @Autowired
-    public void setPriceService(PriceService service) {
-        this.priceService = service;
-    }
 
     @GetMapping(value = "/add/client")
     public String AddClient(Model model) {
@@ -98,7 +92,6 @@ public class AddController {
         model.addAttribute("fuel", new Fuel());
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("station", new Station());
-        model.addAttribute("price", new Price());
         return "add/fuel";
     }
 
@@ -153,11 +146,10 @@ public class AddController {
     }
 
     @PostMapping(value = "/add/fuel")
-    public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
+    public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel) {
         try {
             fuel.setStation(stationService.getStationByName(station.getName()));
             fuelService.addFuel(fuel);
-            priceService.addPrice(fuel, price);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
             return "redirect:/add/fuel";

@@ -11,8 +11,6 @@ import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
 import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
-import by.instasite.database.price.Price;
-import by.instasite.database.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,6 @@ public class EditController {
     private StationService stationService;
     private EmployeeService employeeService;
     private FuelService fuelService;
-    private PriceService priceService;
     private CardService cardService;
     private ClientService clientService;
     private FranchiseService franchiseService;
@@ -61,10 +58,7 @@ public class EditController {
         this.clientService = service;
     }
 
-    @Autowired
-    public void setPriceService(PriceService service) {
-        this.priceService = service;
-    }
+
 
     @GetMapping(value = "/edit/client")
     public String EditClient(Model model) {
@@ -90,7 +84,6 @@ public class EditController {
         model.addAttribute("fuel", new Fuel());
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("station", new Station());
-        model.addAttribute("price", new Price());
         return "add/fuel";
     }
 
@@ -110,7 +103,7 @@ public class EditController {
             clientService.saveClient(client);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
-            return "/add/client";
+            return "redirect:/add/client";
         }
         return "redirect:/client";
     }
@@ -121,7 +114,7 @@ public class EditController {
             franchiseService.saveFranchise(franchise);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "/add/franchise";
+            return "redirect:/add/franchise";
         }
         return "redirect:/franchise";
     }
@@ -129,23 +122,21 @@ public class EditController {
     @PostMapping(value = "/edit/station")
     public String SaveEditedStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
         try {
-            // stationService.saveStation(franchise,station);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "/add/franchise";
+            return "redirect:/add/station";
         }
-        return "redirect:/franchise";
+        return "redirect:/station";
     }
 
     @PostMapping(value = "/edit/fuel")
-    public String SaveEditedFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
+    public String SaveEditedFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel) {
         try {
             fuel.setStation(stationService.getStationByName(station.getName()));
             fuelService.addFuel(fuel);
-            priceService.addPrice(fuel, price);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
-            return "/add/fuel";
+            return "redirect:/add/fuel";
         }
         return "redirect:/fuel";
     }

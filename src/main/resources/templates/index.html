@@ -97,7 +97,7 @@ function reservationListFunction() {
             <form class="formmenu" method="get" th:action="@{/add/station}" th:if="${stations}">
                 <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
             </form>
-            <form class="formmenu" method="get" th:action="@{/admin/add}" th:if="${stations}">
+            <form class="formmenu" method="get" th:action="@{/admin/add}" th:if="${add}">
                 <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
             </form>
         </div>
@@ -120,12 +120,11 @@ function reservationListFunction() {
 </div>
 
 <div id="content">
-    <center><h3>Добро пожаловать</h3></center>
     <a th:text="${error}"></a>
-    <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
     <center>
         <div th:if="${rows}">
             <center><h3>Информация </h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Франшиза</th>
@@ -147,6 +146,7 @@ function reservationListFunction() {
         </div>
         <div th:if="${clients}">
             <center><h3>Клиенты</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Имя</th>
@@ -166,6 +166,7 @@ function reservationListFunction() {
         </div>
         <div th:if="${fuels}">
             <center><h3>Прайс-лист</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Имя</th>
@@ -183,6 +184,7 @@ function reservationListFunction() {
         </div>
         <div th:if="${employees}">
             <center><h3>Сотрудники фирмы</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Имя</th>
@@ -203,6 +205,7 @@ function reservationListFunction() {
 
         <div th:if="${franchises}">
             <center><h3>Название компаний</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Номер</th>
@@ -218,6 +221,7 @@ function reservationListFunction() {
         </div>
         <div th:if="${users}">
             <center><h3>Название компаний</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Логин</th>
@@ -240,7 +244,8 @@ function reservationListFunction() {
             </table>
         </div>
         <div th:if="${stations}">
-            <center><h3>Станции </h3></center>
+            <center><h3>Станции</h3></center>
+            <input type="text" id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names..">
             <table border="1px" id="myTable">
                 <thead>
                 <th>Название заправки</th>

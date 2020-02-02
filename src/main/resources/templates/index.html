@@ -60,12 +60,6 @@ function myFunction() {
             </form>
         </div>
 
-        <div sec:authorize-url="/fuel">
-            <form method="get" th:action="@{/fuel}" class="formmenu">
-                <li><input class="activebtn" type="submit" value="Топливо"/></li>
-            </form>
-        </div>
-
         <div sec:authorize-url="/price">
             <form method="get" th:action="@{/price}" class="formmenu">
                 <li><input class="activebtn" type="submit" value="Цены"/></li>
@@ -100,25 +94,55 @@ function myFunction() {
     <center><h3>Добро пожаловать</h3></center>
     <a th:text="${error}"></a>
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-    <center><table border="1px" id="myTable">
-        <thead>
-        <th>Франшиза</th>
-        <th></th>
-        Название заправки
-        <th>Адрес</th>
-        <th>Тип топлива</th>
-        <th>Стоимость</th>
-        </thead>
-        <tbody>
-        <tr th:each="row : ${rows}">
-            <td th:text="${row.franchise}"></td>
-            <td th:text="${row.stationName}"></td>
-            <td th:text="${row.stationAddress}"></td>
-            <td th:text="${row.fuelName}"></td>
-            <td th:text="${row.price}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <center>
+        <table border="1px" id="myTable" th:if="${rows}">
+            <thead>
+            <th>Франшиза</th>
+            <th> Название заправки</th>
+            <th>Адрес</th>
+            <th>Тип топлива</th>
+            <th>Цена</th>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${rows}">
+                <td th:text="${row.franchise}"></td>
+                <td th:text="${row.stationName}"></td>
+                <td th:text="${row.stationAddress}"></td>
+                <td th:text="${row.fuelName}"></td>
+                <td th:text="${row.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table border="1px" id="myTable" th:if="${clients}">
+            <thead>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Адрес</th>
+            <th>Телефон</th>
+            </thead>
+            <tbody>
+            <tr th:each="client,row: ${clients}">
+                <td th:text="${client.name}"></td>
+                <td th:text="${client.surname}"></td>
+                <td th:text="${client.address}"></td>
+                <td th:text="${client.telephone}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <table border="1px" id="myTable" th:if="${fuels}">
+            <thead>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Адрес</th>
+            </thead>
+            <tbody>
+            <tr th:each="fuel,row: ${fuels}">
+                <td th:text="${fuel.name}"></td>
+                <td th:text="${fuel.description}"></td>
+                <td th:text="${fuel.price}"></td>
+            </tr>
+            </tbody>
+        </table>
     </center>
 </div>
 </body>

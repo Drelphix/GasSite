@@ -1,6 +1,8 @@
 package by.instasite.tableviews;
 
-public class MainView {
+import java.util.Comparator;
+
+public class MainView implements Comparator<MainView> {
     private String franchise;
     private String stationName;
     private String stationAddress;
@@ -61,5 +63,17 @@ public class MainView {
     @Override
     public String toString() {
         return this.getFranchise() + " " + this.getStationName() + " " + this.getStationAddress() + " " + this.getFuelName() + this.getPrice();
+    }
+
+    @Override
+    public int compare(MainView o1, MainView o2) {
+        if (o1.getPrice() > o2.getPrice())
+            return 0;
+        else return 1;
+    }
+
+    @Override
+    public Comparator<MainView> reversed() {
+        return null;
     }
 }

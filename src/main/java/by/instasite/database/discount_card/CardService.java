@@ -1,6 +1,8 @@
 package by.instasite.database.discount_card;
 
 
+import java.util.List;
+
 public interface CardService {
     Card getCardById(int id);
 
@@ -11,5 +13,7 @@ public interface CardService {
     void updateCard(int id, int discount);
 
     void deleteCard(int id);
+
+    List<Card> findAll();
 
 }

@@ -5,6 +5,8 @@ import by.instasite.database.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CardServiceImpl implements CardService {
 
@@ -51,5 +53,10 @@ public class CardServiceImpl implements CardService {
     public void deleteCard(int id) {
         Card delete = repository.getOne(id);
         repository.delete(delete);
+    }
+
+    @Override
+    public List<Card> findAll() {
+        return repository.findAll();
     }
 }

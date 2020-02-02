@@ -15,6 +15,7 @@ import by.instasite.database.gas_station.StationService;
 import by.instasite.database.price.Price;
 import by.instasite.database.price.PriceService;
 import by.instasite.tableviews.MainView;
+import by.instasite.tableviews.PriceView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -71,7 +73,7 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String ShowMainPage(Model model) {
-        ArrayList<MainView> mainViews = new ArrayList<MainView>();
+        List<MainView> mainViews = new ArrayList<>();
         for (Franchise franchise : franchiseService.findAll()) {
             for (Station station : franchise.getStations()) {
                 for (Fuel fuel : station.getFuel()) {
@@ -84,22 +86,25 @@ public class MainController {
         return "index";
     }
 
+
     @GetMapping(value = "/client")
     public String ShowClientTable(Model model) {
-        return "index";
-    }
-
-    @GetMapping(value = "/fuel")
-    public String ShowFuelTable(Model model) {
-        model.addAttribute("users");
+        List<Client> clients = clientService.findAll();
+        model.addAttribute("clients", clients);
         return "index";
     }
 
     @GetMapping(value = "/price")
-    public String ShowPriceTable(Model model) {
-        model.addAttribute("users");
+    public String ShowFuelTable(Model model) {
+        List<PriceView> priceViewList = new ArrayList<>();
+        for (Fuel fuel : fuelService.findAll()) {
+            PriceView priceView = new PriceView(fuel.getFuelName(), fuel.getDescription(), fuel.getPrice().getPrice());
+            priceViewList.add(priceView);
+        }
+        model.addAttribute("fuels", priceViewList);
         return "index";
     }
+
 
     @GetMapping(value = "/employee")
     public String ShowEmployeeTable(Model model) {

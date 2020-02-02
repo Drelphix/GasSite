@@ -23,6 +23,11 @@ public class FuelServiceImpl implements FuelService {
     }
 
     @Override
+    public Fuel getFuelById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void addFuel(Fuel fuel) {
         repository.saveAndFlush(fuel);
     }

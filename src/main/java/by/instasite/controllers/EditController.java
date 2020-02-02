@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class EditController {
@@ -76,10 +76,11 @@ public class EditController {
     }
 
     @GetMapping(value = "/edit/fuel")
-    public String EditFuel(Model model, @RequestAttribute int id) {
-        model.addAttribute("fuel", new Fuel());
+    public String EditFuel(Model model, @RequestParam(name = "id") int id) {
+        Fuel fuel = fuelService.getFuelById(id);
+        model.addAttribute("fuel", fuel);
         model.addAttribute("stations", stationService.findAll());
-        model.addAttribute("station", new Station());
+        model.addAttribute("station", fuel.getStation());
         return "add/fuel";
     }
 
@@ -129,7 +130,7 @@ public class EditController {
     public String SaveEditedFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel) {
         try {
             fuel.setStation(stationService.getStationByName(station.getName()));
-            fuelService.addFuel(fuel);
+            fuelService.updateFuel(fuel.getId(), fuel.getFuelName(), fuel.getDescription(), fuel.getPrice(), fuel.getStation());
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка редактирования, попробуйте еще раз");
             return "redirect:/fuel";

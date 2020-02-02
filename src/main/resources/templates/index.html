@@ -174,7 +174,6 @@ function reservationListFunction() {
                 </thead>
                 <tbody>
                 <tr th:each="fuel,row: ${fuels}">
-                    <td><a th:text="${fuel.fuelName}"></a></td>
                     <td><a href="/edit/fuel" th:href="@{/edit/fuel/(id=${fuel.id})}" th:text="${fuel.fuelName}"></a>
                     </td>
                     <td th:text="${fuel.description}"></td>

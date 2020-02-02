@@ -86,7 +86,7 @@
                             Станции
                         </option>
                     </select>
-
+                <p><input th:field="${fuel.id}" th:text="${fuel.id}" type="hidden"></p>
                 <p><input placeholder="Название" required th:field="${fuel.fuelName}" type="text"></p>
                 <p><textarea cols="40" name="description" rows="3" th:field="${fuel.description}"></textarea></p>
                 <p><input placeholder="Цена" required th:field="${fuel.price}" type="text"></p>

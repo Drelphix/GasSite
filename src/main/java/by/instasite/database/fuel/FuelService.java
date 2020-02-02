@@ -7,6 +7,8 @@ import java.util.List;
 public interface FuelService {
     List<Fuel> getFuelByName(String fuelName);
 
+    Fuel getFuelById(int id);
+
     void addFuel(Fuel fuel);
 
     void updateFuel(int id, String fuelName, String description, double price, Station station);

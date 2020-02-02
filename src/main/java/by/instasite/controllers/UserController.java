@@ -20,14 +20,22 @@ public class UserController {
 
     @GetMapping(value = "/settings")
     public String UserAccount(Model model) {
+        model.addAttribute("client");
         return "user_settings";
+    }
+
+    @GetMapping(value = "/admin/add")
+    public String ChangeUserInfo(Model model) {
+        List<User> users = service.findAll();
+        model.addAttribute("users", users);
+        return "index";
     }
 
     @GetMapping(value = "/admin")
     public String Administration(Model model) {
         List<User> users = service.findAll();
         model.addAttribute("users", users);
-        return "admin";
+        return "index";
     }
 
 }

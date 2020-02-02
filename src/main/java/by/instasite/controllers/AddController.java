@@ -26,11 +26,6 @@ public class AddController {
         return "add/fuel";
     }
 
-    @GetMapping(value = "/add/price")
-    public String AddPrice(Model model) {
-        return "add/price";
-    }
-
     @GetMapping(value = "/add/station")
     public String AddStation(Model model) {
         return "add/station";

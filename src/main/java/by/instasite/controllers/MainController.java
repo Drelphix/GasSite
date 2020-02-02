@@ -119,6 +119,12 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping(value = "/station")
+    public String ShowStationTable(Model model) {
+        model.addAttribute("stations", stationService.findAll());
+        return "index";
+    }
+
 
     @GetMapping(value = "/test")
     public String addNewPage(Model model) {

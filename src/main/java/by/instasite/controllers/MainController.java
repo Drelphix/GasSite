@@ -108,13 +108,14 @@ public class MainController {
 
     @GetMapping(value = "/employee")
     public String ShowEmployeeTable(Model model) {
-        model.addAttribute("users");
+        model.addAttribute("employees", employeeService.findAll());
         return "index";
     }
 
     @GetMapping(value = "/franchise")
     public String ShowFranchiseTable(Model model) {
-        model.addAttribute("users");
+
+        model.addAttribute("franchises", franchiseService.findAll());
         return "index";
     }
 

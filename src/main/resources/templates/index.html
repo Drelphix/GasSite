@@ -125,13 +125,13 @@ function reservationListFunction() {
             <center><h3>Информация </h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Франшиза</th>
                 <th> Название заправки</th>
                 <th>Адрес</th>
                 <th>Тип топлива</th>
                 <th>Цена</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="row : ${rows}">
                     <td th:text="${row.franchise}"></td>
@@ -147,12 +147,12 @@ function reservationListFunction() {
             <center><h3>Клиенты</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Имя</th>
                 <th>Фамилия</th>
                 <th>Адрес</th>
                 <th>Телефон</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="client,row: ${clients}">
                     <td><a href="/edit/client" th:href="@{/edit/client/(id=${client.id})}" th:text="${client.name}"></a>
@@ -167,11 +167,11 @@ function reservationListFunction() {
             <center><h3>Прайс-лист</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Имя</th>
                 <th>Фамилия</th>
                 <th>Адрес</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="fuel,row: ${fuels}">
                     <td><a href="/edit/fuel" th:href="@{/edit/fuel/(id=${fuel.id})}" th:text="${fuel.fuelName}"></a>
@@ -186,12 +186,12 @@ function reservationListFunction() {
             <center><h3>Сотрудники фирмы</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Имя</th>
                 <th>Фамилия</th>
                 <th>Адрес</th>
                 <th>Телефон</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="employee,row: ${employees}">
                     <td><a href="/edit/employee" th:href="@{/edit/employee/(id=${employee.id})}"
@@ -208,12 +208,12 @@ function reservationListFunction() {
             <center><h3>Название компаний</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Номер</th>
                 <th>Название</th>
                 <th>Количество станций</th>
                 <th>Количество клиентов</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="franchise,row: ${franchises}">
 
@@ -230,14 +230,14 @@ function reservationListFunction() {
             <center><h3>Пользователи</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Логин</th>
                 <th>Пароль</th>
                 <th>Почта</th>
                 <th>Страна</th>
                 <th>Роль</th>
                 <th>Активен</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="client : ${users}">
                     <td><a href="/edit/admin" th:href="@{/edit/admin/(id=${client.id})}"
@@ -255,12 +255,12 @@ function reservationListFunction() {
             <center><h3>Станции</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
-                <thead>
+                <tr class="header">
                 <th>Название заправки</th>
                 <th>Адрес</th>
                 <th>Количество работников</th>
                 <th>Количество видов топлива</th>
-                </thead>
+                </tr>
                 <tbody>
                 <tr th:each="station : ${stations}">
                     <td><a href="/edit/station" th:href="@{/edit/station/(id=${station.id})}"

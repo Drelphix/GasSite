@@ -60,14 +60,14 @@
     <div class="footer">
         <div sec:authorize="isAuthenticated()">
             <form method="post" th:action="@{/logout}">
-                <input class="activebtnfooter" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
+                <input class="activebtnfooterlog" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
             </form>
         </div>
     </div>
 </div>
 
 <div id="content">
-    <center><h3>Добавление дисконтной карты</h3></center>
+    <center><h3>Добавить станцию</h3></center>
     <form action="#" class="transparent" method="post" th:action="@{/add/station}">
         <div class="form-inner">
             <a th:text="${error}"></a>

@@ -1,6 +1,6 @@
 <html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/index.css" rel="stylesheet" type="text/css"/>
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
     <title>InstaSite</title>
@@ -77,7 +77,7 @@
         <div class="form-inner">
             <a th:text="${error}"></a>
             <center>
-                <p><input th:field="${employee.id}" th:text="${employee.id}" type="hidden"></p>
+                <p><input th:field="${employee.id}" th:value="${employee.id}" type="hidden"></p>
                 <p><input placeholder="Имя" required th:field="${employee.name}" type="text"></p>
                 <p><input placeholder="Фамилия" required th:field="${employee.surname}" type="text"></p>
                 <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>

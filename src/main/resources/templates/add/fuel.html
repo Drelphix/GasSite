@@ -1,6 +1,6 @@
 <html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/index.css" rel="stylesheet" type="text/css"/>
 
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
@@ -86,7 +86,7 @@
                             Станции
                         </option>
                     </select>
-                <p><input th:field="${fuel.id}" th:text="${fuel.id}" type="hidden"></p>
+                <input type="hidden" th:field="${fuel.id}" th:value="${fuel.id}">
                 <p><input placeholder="Название" required th:field="${fuel.fuelName}" type="text"></p>
                 <p><textarea cols="40" name="description" rows="3" th:field="${fuel.description}"></textarea></p>
                 <p><input placeholder="Цена" required th:field="${fuel.price}" type="text"></p>

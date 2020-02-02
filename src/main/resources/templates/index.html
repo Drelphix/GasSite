@@ -96,8 +96,8 @@ function reservationListFunction() {
             <form class="formmenu" method="get" th:action="@{/add/station}" th:if="${stations}">
                 <li><input class="btnadd" type="submit" value="Добавить станцию"/></li>
             </form>
-            <form class="formmenu" method="get" th:action="@{/admin/add}" th:if="${add}">
-                <li><input class="btnadd" type="submit" value="Добавить станцию"/></li>
+            <form class="formmenu" method="get" th:action="@{/add/franchise}" th:if="${franchises}">
+                <li><input class="btnadd" type="submit" value="Добавить компанию"/></li>
             </form>
         </div>
 
@@ -219,7 +219,7 @@ function reservationListFunction() {
             </table>
         </div>
         <div th:if="${users}">
-            <center><h3>Название компаний</h3></center>
+            <center><h3>Пользователи</h3></center>
             <input id="myInput" onkeyup="reservationListFunction()" placeholder="Search for names.." type="text">
             <table border="1px" id="myTable">
                 <thead>

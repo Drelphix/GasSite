@@ -55,19 +55,19 @@ function reservationListFunction() {
         </form>
         <div sec:authorize-url="/client">
             <form name="pole"  method="get" th:action="@{/client}" class="formmenu">
-                <li><input class="activebtn" name="client" type="submit" value="Клиенты"/></li>
+                <li><input class="activebtn"type="submit" value="Клиенты"/></li>
             </form>
         </div>
 
         <div sec:authorize-url="/employee">
             <form name="pole"  method="get" th:action="@{/employee}" class="formmenu">
-                <li><input class="activebtn" name="employee" type="submit" value="Сотрудники"/></li>
+                <li><input class="activebtn" type="submit" value="Сотрудники"/></li>
             </form>
         </div>
 
         <div sec:authorize-url="/price">
             <form name="pole"  method="get" th:action="@{/price}" class="formmenu">
-                <li><input class="activebtn" name="price" type="submit" value="Цены"/></li>
+                <li><input class="activebtn" type="submit" value="Цены"/></li>
             </form>
         </div>
         <div sec:authorize-url="/station">
@@ -77,28 +77,28 @@ function reservationListFunction() {
         </div>
         <div sec:authorize-url="/franchise">
             <form name="pole"  method="get" th:action="@{/franchise}" class="formmenu">
-                <li><input class="activebtn" name="franchise" type="submit" value="Франшиза"/></li>
+                <li><input class="activebtn" type="submit" value="Франшиза"/></li>
             </form>
         </div>
 
         <div sec:authorize-url="/add/**">
             <form class="formmenu" method="get" th:action="@{/add/client}" th:if="${clients}">
-                <li><input class="activebtn" type="submit" value="Добавить пользователя"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить пользователя"/></li>
             </form>
             <form class="formmenu" method="get" th:action="@{/add/fuel}" th:if="${fuels}">
-                <li><input class="activebtn" type="submit" value="Добавить топливо"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить топливо"/></li>
             </form>
             <form class="formmenu" method="get" th:action="@{/add/card}" th:if="${cards}">
-                <li><input class="activebtn" type="submit" value="Добавить карту"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить карту"/></li>
             </form>
             <form class="formmenu" method="get" th:action="@{/add/employee}" th:if="${employees}">
-                <li><input class="activebtn" type="submit" value="Добавить работника"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить работника"/></li>
             </form>
             <form class="formmenu" method="get" th:action="@{/add/station}" th:if="${stations}">
-                <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить станцию"/></li>
             </form>
             <form class="formmenu" method="get" th:action="@{/admin/add}" th:if="${add}">
-                <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
+                <li><input class="btnadd" type="submit" value="Добавить станцию"/></li>
             </form>
         </div>
 

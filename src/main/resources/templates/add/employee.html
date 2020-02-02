@@ -35,19 +35,19 @@
             </form>
         </div>
 
-        <div sec:authorize-url="/fuel">
-            <form method="get" th:action="@{/fuel}" class="formmenu">
-                <li><input class="activebtn" type="submit" value="Топливо"/></li>
-            </form>
-        </div>
-
         <div sec:authorize-url="/price">
             <form method="get" th:action="@{/price}" class="formmenu">
                 <li><input class="activebtn" type="submit" value="Цены"/></li>
             </form>
         </div>
 
-        <div sec:authorize-url="/franchise">
+        <div sec:authorize-url="/station">
+            <form method="get" th:action="@{/station}" class="formmenu">
+                <li><input class="activebtn" type="submit" value="Станции"/></li>
+            </form>
+        </div>
+
+                <div sec:authorize-url="/franchise">
             <form method="get" th:action="@{/franchise}" class="formmenu">
                 <li><input class="activebtn" type="submit" value="Франдшиза"/></li>
             </form>
@@ -60,7 +60,7 @@
     <div class="footer">
         <div sec:authorize="isAuthenticated()">
             <form method="post" th:action="@{/logout}">
-                <input class="activebtnfooter" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
+                <input class="activebtnfooterlog" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
             </form>
         </div>
     </div>

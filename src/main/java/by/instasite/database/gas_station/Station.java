@@ -22,15 +22,13 @@ public class Station {
     @Column(name = "Address")
     private String address;
 
-    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Employee.class)
     private Set<Employee> employee;
 
-    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "station", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Fuel.class)
     private Set<Fuel> fuel;
 
     @ManyToOne
-    @ElementCollection
-    @JoinColumn(name = "idFranchise")
     private Franchise franchise;
 
 

@@ -90,12 +90,9 @@
                 <p><input placeholder="Название" required th:field="${fuel.fuelName}" type="text"></p>
                 <p><textarea cols="40" name="description" rows="3" th:field="${fuel.description}"></textarea></p>
                 <p><input placeholder="Цена" required th:field="${price.price}" type="text"></p>
-
-                <form action="#" class="transparent" method="post" th:action="@{/login}">
                     <div class="form-inner">
                         <input class="input" type="submit" value="Сохранить"/>
                     </div>
-                </form>
             </center>
     </div>
     </form>

@@ -15,13 +15,14 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "idStation")
     private Set<Station> stations;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Client.class)
     private Set<Client> client;
 
     public Franchise() {

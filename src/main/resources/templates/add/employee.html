@@ -13,7 +13,7 @@
     <ul>
         <div sec:authorize="isAuthenticated()">
             <li>
-                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span
+                <center><a class="active" id="userlog" th:href="@{/settings}">Добро пожаловать, <span
                         sec:authentication="name"></span></a></center>
             </li>
         </div>
@@ -73,30 +73,28 @@
 
 <div id="content">
     <center><h3>Добавить сотрудника</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addemployee}">
+    <form action="#" class="transparent" method="post" th:action="@{/add/employee}">
         <div class="form-inner">
             <a th:text="${error}"></a>
             <center>
-                <p><input required type="text" placeholder="Имя"></p>
-                <p><input required type="text" placeholder="Фамилия"></p>
-                <p><input required type="text" placeholder="Адрес"></p>
-                <p><input required type="tel" placeholder="Телефон"></p>
-                <p><select th:each="stat : ${station}">
-                    <option th:value="${station.id}"></option>
+                <p><input placeholder="Имя" required th:field="${employee.name}" type="text"></p>
+                <p><input placeholder="Фамилия" required th:field="${employee.surname}" type="text"></p>
+                <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>
+                <p><input placeholder="Телефон" required th:field="${employee.telephone}" type="tel"></p>
+                <p><select th:field="${station.id}">
+                    <option th:each="fran : ${stations}"
+                            th:text="${fran.name}"
+                            th:value="${fran.id}">
+                    </option>
                 </select>
                 </p>
 
-                <form action="#" class="transparent" method="post" th:action="@{/login}">
+
+                <form action="#" class="transparent" method="post" th:action="@{/add/employee}">
                     <div class="form-inner">
-                        <input class="input" type="submit" value="Войти"/>
+                        <input class="input" type="submit" value="Добавить"/>
                     </div>
                 </form>
-
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.password}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.country}"></td>
 
             </center>
         </div>

@@ -93,8 +93,12 @@ public class MainController {
     public String ShowFuelTable(Model model) {
         List<PriceView> priceViewList = new ArrayList<>();
         for (Fuel fuel : fuelService.findAll()) {
-            PriceView priceView = new PriceView(fuel.getFuelName(), fuel.getDescription(), fuel.getPrice().getPrice());
-            priceViewList.add(priceView);
+            try {
+                PriceView priceView = new PriceView(fuel.getFuelName(), fuel.getDescription(), fuel.getPrice().getPrice());
+                priceViewList.add(priceView);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
         model.addAttribute("fuels", priceViewList);
         return "index";

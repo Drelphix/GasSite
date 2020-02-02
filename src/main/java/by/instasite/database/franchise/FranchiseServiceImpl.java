@@ -17,6 +17,16 @@ public class FranchiseServiceImpl implements FranchiseService {
 
 
     @Override
+    public Franchise getByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
+    public Franchise getById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void saveFranchise(Franchise franchise) {
         repository.save(franchise);
     }

@@ -4,6 +4,7 @@ import by.instasite.database.client.Client;
 import by.instasite.database.client.ClientService;
 import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardService;
+import by.instasite.database.employee.Employee;
 import by.instasite.database.employee.EmployeeService;
 import by.instasite.database.franchise.Franchise;
 import by.instasite.database.franchise.FranchiseService;
@@ -72,6 +73,12 @@ public class AddController {
         return "add/client";
     }
 
+    @GetMapping(value = "/add/franchise")
+    public String AddFranchise(Model model) {
+        model.addAttribute("franchise", new Franchise());
+        return "add/franchise";
+    }
+
     @GetMapping(value = "/add/card")
     public String AddCard(Model model) {
         model.addAttribute("card");
@@ -80,7 +87,9 @@ public class AddController {
 
     @GetMapping(value = "/add/employee")
     public String AddEmployee(Model model) {
-        model.addAttribute("employee");
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("stations", stationService.findAll());
+        model.addAttribute("station", new Station());
         return "add/employee";
     }
 
@@ -120,17 +129,23 @@ public class AddController {
             franchiseService.saveFranchise(franchise);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "/add/franchise";
+            return "redirect:/add/franchise";
         }
         return "redirect:/franchise";
     }
 
     @PostMapping(value = "/add/station")
-    public String SaveStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
+    public String SaveStation(Model model, @ModelAttribute Station station, @ModelAttribute Franchise franchise) {
         try {
-            station.setFranchise(franchise);
+            station.setFranchise(franchiseService.getById(franchise.getId()));
+            station.setFuel(null);
+            station.setEmployee(null);
+            System.out.println("FRANSHISEID" + station.getFranchise().getId());
+            System.out.println("FRANSHISEID" + station.getName());
+            System.out.println("FRANSHISEID" + station.getAddress());
             stationService.saveStation(station);
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
             return "redirect:/add/station";
         }
@@ -145,9 +160,21 @@ public class AddController {
             priceService.addPrice(fuel, price);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
-            return "/add/fuel";
+            return "redirect:/add/fuel";
         }
-        return "redirect:/fuel";
+        return "redirect:/price";
+    }
+
+    @PostMapping(value = "/add/employee")
+    public String SaveEmployee(Model model, @ModelAttribute Employee employee, @ModelAttribute Station station) {
+        try {
+            employee.setStation(stationService.getStationByName(station.getName()));
+            employeeService.addEmployee(employee);
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
+            return "redirect:/add/employee";
+        }
+        return "redirect:/employee";
     }
 }
 

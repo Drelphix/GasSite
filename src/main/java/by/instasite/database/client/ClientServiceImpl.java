@@ -50,13 +50,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void updateClient(int id, String name, String surname, String address, String telephone, int card) {
+    public void updateClient(int id, String name, String surname, String address, String telephone, Card card) {
         Client updated = repository.getOne(id);
-        Card cardUpdate = cardRepository.getOne(card);
         updated.setSurname(surname);
         updated.setAddress(address);
         updated.setTelephone(telephone);
-        updated.setCard(cardUpdate);
+        updated.setCard(card);
         repository.save(updated);
     }
 

@@ -1,5 +1,7 @@
 package by.instasite.database.employee;
 
+import by.instasite.database.gas_station.Station;
+
 import java.util.List;
 
 public interface EmployeeService {
@@ -7,7 +9,7 @@ public interface EmployeeService {
 
     void addEmployee(Employee employee);
 
-    void updateEmployee(int id, String name, String surname, String address, String telephone);
+    void updateEmployee(int id, String name, String surname, String address, String telephone, Station station);
 
     void deleteEmployee(int id);
 

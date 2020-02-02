@@ -21,6 +21,13 @@ public class FranchiseServiceImpl implements FranchiseService {
         repository.save(franchise);
     }
 
+    @Override
+    public void updateFranchise(Franchise franchise, String name) {
+        Franchise updated = repository.getOne(franchise.getId());
+        updated.setName(name);
+        repository.save(updated);
+    }
+
 
     @Override
     public void deleteFranchise(int id) {

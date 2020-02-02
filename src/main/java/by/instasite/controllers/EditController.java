@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class AddController {
+public class EditController {
+
     private StationService stationService;
     private EmployeeService employeeService;
     private FuelService fuelService;
@@ -65,27 +66,27 @@ public class AddController {
         this.priceService = service;
     }
 
-    @GetMapping(value = "/add/client")
-    public String AddClient(Model model) {
+    @GetMapping(value = "/edit/client")
+    public String EditClient(Model model) {
         model.addAttribute("client", new Client());
         model.addAttribute("card", new Card());
         return "add/client";
     }
 
-    @GetMapping(value = "/add/card")
-    public String AddCard(Model model) {
+    @GetMapping(value = "/edit/card")
+    public String EditCard(Model model) {
         model.addAttribute("card");
         return "add/card";
     }
 
-    @GetMapping(value = "/add/employee")
-    public String AddEmployee(Model model) {
+    @GetMapping(value = "/edit/employee")
+    public String EditEmployee(Model model) {
         model.addAttribute("employee");
         return "add/employee";
     }
 
-    @GetMapping(value = "/add/fuel")
-    public String AddFuel(Model model) {
+    @GetMapping(value = "/edit/fuel")
+    public String EditFuel(Model model) {
         model.addAttribute("fuel", new Fuel());
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("station", new Station());
@@ -93,16 +94,16 @@ public class AddController {
         return "add/fuel";
     }
 
-    @GetMapping(value = "/add/station")
-    public String AddStation(Model model) {
+    @GetMapping(value = "/edit/station")
+    public String EditStation(Model model) {
         model.addAttribute("station", new Station());
         model.addAttribute("franchise", new Franchise());
         model.addAttribute("franchises", franchiseService.findAll());
         return "add/station";
     }
 
-    @PostMapping(value = "/add/client")
-    public String SaveClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client) {
+    @PostMapping(value = "/edit/client")
+    public String EditClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client) {
         try {
             client.setCard(card);
             cardService.addCard(card);
@@ -114,8 +115,8 @@ public class AddController {
         return "redirect:/client";
     }
 
-    @PostMapping(value = "/add/franchise")
-    public String SaveFranchise(Model model, @ModelAttribute Franchise franchise) {
+    @PostMapping(value = "/edit/franchise")
+    public String SaveEditedFranchise(Model model, @ModelAttribute Franchise franchise) {
         try {
             franchiseService.saveFranchise(franchise);
         } catch (Exception e) {
@@ -125,8 +126,8 @@ public class AddController {
         return "redirect:/franchise";
     }
 
-    @PostMapping(value = "/add/station")
-    public String SaveStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
+    @PostMapping(value = "/edit/station")
+    public String SaveEditedStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
         try {
             // stationService.saveStation(franchise,station);
         } catch (Exception e) {
@@ -136,8 +137,8 @@ public class AddController {
         return "redirect:/franchise";
     }
 
-    @PostMapping(value = "/add/fuel")
-    public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
+    @PostMapping(value = "/edit/fuel")
+    public String SaveEditedFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
         try {
             fuel.setStation(stationService.getStationByName(station.getName()));
             fuelService.addFuel(fuel);
@@ -148,5 +149,5 @@ public class AddController {
         }
         return "redirect:/fuel";
     }
-}
 
+}

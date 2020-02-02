@@ -1,6 +1,6 @@
 <html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../../css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet" />
 
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
@@ -73,7 +73,7 @@
 
 
 <div id="content">
-    <center><h3>Добавление топлива</h3></center>
+    <center><h3>Топливо</h3></center>
     <form action="#" class="transparent" method="post" th:action="@{/add/fuel}">
         <div class="form-inner">
             <a th:text="${error}"></a>

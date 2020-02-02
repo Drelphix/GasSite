@@ -128,12 +128,13 @@ public class AddController {
     @PostMapping(value = "/add/station")
     public String SaveStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
         try {
-            // stationService.saveStation(franchise,station);
+            station.setFranchise(franchise);
+            stationService.saveStation(station);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "/add/franchise";
+            return "redirect:/add/station";
         }
-        return "redirect:/franchise";
+        return "redirect:/station";
     }
 
     @PostMapping(value = "/add/fuel")

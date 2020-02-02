@@ -80,9 +80,9 @@
                         </option>
                     </select>
                 <p><input placeholder="Название" required th:field="${station.name}" type="text"></p>
-                <p><input placeholder="Название" required th:field="${station.address}" type="text"></p>
+                <p><input placeholder="Адрес" required th:field="${station.address}" type="text"></p>
 
-                <form action="#" class="transparent" method="post" th:action="@{/login}">
+                <form action="#" class="transparent" method="post" th:action="@{/add/station}">
                     <div class="form-inner">
                         <input class="input" type="submit" value="Сохранить"/>
                     </div>

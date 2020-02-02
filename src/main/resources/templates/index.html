@@ -50,9 +50,11 @@ function reservationListFunction() {
                 <li><input class="activebtnadmin" type="submit" value="Администрирование"/></li>
             </form>
         </div>
+
         <form class="formmenu" method="get" th:action="@{/}">
             <li><input class="activebtn" type="submit" value="Главная"/></li>
         </form>
+
         <div sec:authorize-url="/client">
             <form name="pole"  method="get" th:action="@{/client}" class="formmenu">
                 <li><input class="activebtn"type="submit" value="Клиенты"/></li>

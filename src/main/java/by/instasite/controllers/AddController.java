@@ -86,7 +86,10 @@ public class AddController {
 
     @GetMapping(value = "/add/fuel")
     public String AddFuel(Model model) {
-        model.addAttribute("fuel");
+        model.addAttribute("fuel", new Fuel());
+        model.addAttribute("stations", stationService.findAll());
+        model.addAttribute("station", new Station());
+        model.addAttribute("price", new Price());
         return "add/fuel";
     }
 

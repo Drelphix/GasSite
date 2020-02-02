@@ -22,10 +22,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/resources/**", "/registration").permitAll()
-                .antMatchers("/client", "/franchise", "/employee", "/add/*").permitAll()//hasAnyAuthority("admin", "manager")
                 .antMatchers("/fuel", "/price").authenticated()
                 .antMatchers("/admin").hasAuthority("admin")
+                .antMatchers("/client", "/franchise", "/employee", "/add/*").permitAll()//hasAnyAuthority("admin", "manager")
+                .antMatchers("/", "/resources/**", "/registration").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 
 @Controller
 public class EditController {
@@ -67,11 +68,6 @@ public class EditController {
         return "add/client";
     }
 
-    @GetMapping(value = "/edit/card")
-    public String EditCard(Model model) {
-        model.addAttribute("card");
-        return "add/card";
-    }
 
     @GetMapping(value = "/edit/employee")
     public String EditEmployee(Model model) {
@@ -80,7 +76,7 @@ public class EditController {
     }
 
     @GetMapping(value = "/edit/fuel")
-    public String EditFuel(Model model) {
+    public String EditFuel(Model model, @RequestAttribute int id) {
         model.addAttribute("fuel", new Fuel());
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("station", new Station());
@@ -113,7 +109,7 @@ public class EditController {
         try {
             franchiseService.saveFranchise(franchise);
         } catch (Exception e) {
-            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
+            model.addAttribute("error", "Ошибка редактирования франшизы, попробуйте еще раз");
             return "redirect:/add/franchise";
         }
         return "redirect:/franchise";
@@ -123,8 +119,8 @@ public class EditController {
     public String SaveEditedStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
         try {
         } catch (Exception e) {
-            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "redirect:/add/station";
+            model.addAttribute("error", "Ошибка редактирования станции, попробуйте еще раз");
+            return "redirect:/station";
         }
         return "redirect:/station";
     }
@@ -135,8 +131,8 @@ public class EditController {
             fuel.setStation(stationService.getStationByName(station.getName()));
             fuelService.addFuel(fuel);
         } catch (Exception e) {
-            model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
-            return "redirect:/add/fuel";
+            model.addAttribute("error", "Ошибка редактирования, попробуйте еще раз");
+            return "redirect:/fuel";
         }
         return "redirect:/fuel";
     }

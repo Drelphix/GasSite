@@ -29,6 +29,7 @@ public class Station {
     private Set<Fuel> fuel;
 
     @ManyToOne
+    @JoinColumn(name = "idFranchise")
     private Franchise franchise;
 
 

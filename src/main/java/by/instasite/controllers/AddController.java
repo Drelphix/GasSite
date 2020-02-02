@@ -5,9 +5,13 @@ import by.instasite.database.client.ClientService;
 import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardService;
 import by.instasite.database.employee.EmployeeService;
+import by.instasite.database.franchise.Franchise;
 import by.instasite.database.franchise.FranchiseService;
+import by.instasite.database.fuel.Fuel;
 import by.instasite.database.fuel.FuelService;
+import by.instasite.database.gas_station.Station;
 import by.instasite.database.gas_station.StationService;
+import by.instasite.database.price.Price;
 import by.instasite.database.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,6 +107,30 @@ public class AddController {
             return "/add/client";
         }
         return "redirect:/client";
+    }
+
+    @PostMapping(value = "/add/franchise")
+    public String SaveFranchise(Model model, @ModelAttribute Franchise franchise) {
+        try {
+            franchiseService.saveFranchise(franchise);
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
+            return "/add/franchise";
+        }
+        return "redirect:/franchise";
+    }
+
+    @PostMapping(value = "/add/fuel")
+    public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
+        try {
+            fuel.setPrice(price);
+            fuelService.addFuel(station, fuel);
+            priceService.addPrice(fuel, price);
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
+            return "/add/fuel";
+        }
+        return "redirect:/fuel";
     }
 }
 

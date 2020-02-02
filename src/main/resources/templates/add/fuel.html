@@ -67,32 +67,26 @@
 </div>
 
 <div id="content">
-    <center><h3>Добавление дисконтной карты</h3></center>
+    <center><h3>Добавление топлива</h3></center>
     <form action="#" class="transparent" method="post" th:action="@{/addfuel}">
     <div class="form-inner">
     <a th:text="${error}"></a>
-    <center>
-            <p><input required  type="text" placeholder="Название"></p>
-            <p><textarea name="description" cols="40" rows="3"></textarea></p>
+        <center>
             <p>
-                <select th:each="user : ${idStation}">
-                <option th:value="${id}"></option>
+                <select th:each="station : ${stations}">
+                    <option th:value="${station.name}"></option>
                 </select>
             </p>
+            <p><input required type="text" placeholder="Название"></p>
+            <p><textarea name="description" cols="40" rows="3"></textarea></p>
+            <p><input placeholder="Цена" required th: type="text"></p>
 
-        <form action="#" class="transparent" method="post" th:action="@{/login}">
-            <div class="form-inner">
-                <input class="input" type="submit" value="Войти"/>
-            </div>
-        </form>
-
-            <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.country}"></td>
-
-    </center>
+            <form action="#" class="transparent" method="post" th:action="@{/login}">
+                <div class="form-inner">
+                    <input class="input" type="submit" value="Войти"/>
+                </div>
+            </form>
+        </center>
     </div>
     </form>
 </div>

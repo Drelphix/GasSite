@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/fuel", "/price").authenticated()
+                .antMatchers("/fuel", "/price").permitAll()
                 .antMatchers("/admin").hasAuthority("admin")
                 .antMatchers("/client", "/franchise", "/employee", "/add/*").permitAll()//hasAnyAuthority("admin", "manager")
                 .antMatchers("/", "/resources/**", "/registration").permitAll()

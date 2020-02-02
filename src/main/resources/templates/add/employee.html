@@ -76,8 +76,8 @@
             <p><input required  type="text" placeholder="Фамилия"></p>
             <p><input required  type="text" placeholder="Адрес"></p>
             <p><input required  type="tel" placeholder="Телефон"></p>
-            <p><select th:each="user : ${idStation}">
-                <option th:value="${id}"></option>
+            <p><select th:each="stat : ${station}">
+                <option th:value="${station.id}"></option>
                </select>
             </p>
 

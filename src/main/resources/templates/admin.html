@@ -1,12 +1,12 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="css/index.css" rel="stylesheet" type="text/css"/>
-    <script src='http://code.jquery.com/jquery-1.12.2.js' type='text/javascript'></script>
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.12.2.js'></script>
     <meta charset="UTF-8">
     <title>InstaSite</title>
 
     <script>
-function myFunction() {
+function reservationListFunction() {
   // Declare variables
   var input, filter, table, tr, td, i;
   input = document.getElementById("myInput");
@@ -16,52 +16,85 @@ function myFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0]; //Тут меняем по какому столбцу ищем
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
+    if (!tr[i].classList.contains('header')) {
+      td = tr[i].getElementsByTagName("td"),
+      match = false;
+      for (j = 0; j < td.length; j++) {
+        if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+          match = true;
+          break;
+        }
+      }
+      if (!match) {
         tr[i].style.display = "none";
+      } else {
+        tr[i].style.display = "";
       }
     }
   }
 }
-
-    </script>
+</script>
 
 </head>
 
-<header>
-    <div class="header">
-        <ul>
-            <li style="float:left" th:action="@{/settings}" th:if="${#httpServletRequest.remoteUser!=null}">
-                <a class="active" id="userlog">Добро пожаловать, [[${#httpServletRequest.remoteUser}]]</a>
-            </li>
-            <li><a href="#">Категория</a></li>
-            <li><a href="#">Категория 1</a></li>
-            <li><a href="#">Категория 2</a></li>
-            <li><a href="#">Категория 3</a></li>
-            <li class="dropdown">
-                <a class="dropbtn" href="javascript:void(0)">Dropdown</a>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </li>
-            <form method="post" th:action="@{/logout}" th:if="${#httpServletRequest.remoteUser!=null}">
-                <li style="float:right"><input class="activebtn" method="post" th:action="@{/logout}" type="submit"
-                                               value="Выйти"/></li>
-
-            </form>
-            <form method="get" th:action="@{/login}" th:unless="${#httpServletRequest.remoteUser!=null}">
-                <li style="float:right"><input class="activebtn" type="submit" value="Авторизоваться"/></li>
-            </form>
-        </ul>
-    </div>
-</header>
-
 <body>
+
+<nav id="menuVertical">
+    <ul>
+        <div sec:authorize="isAuthenticated()">
+            <li>
+                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
+            </li>
+        </div>
+
+        <div sec:authorize-url="/admin">
+            <form name="pole" method="get" th:action="@{/admin}" class="formmenu">
+                <li><input class="activebtnadmin" type="submit" value="Администрирование"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/client">
+            <form name="pole"  method="get" th:action="@{/client}" class="formmenu">
+                <li><input class="activebtn" name="client" type="submit" value="Клиенты"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/employee">
+            <form name="pole"  method="get" th:action="@{/employee}" class="formmenu">
+                <li><input class="activebtn" name="employee" type="submit" value="Сотрудники"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/price">
+            <form name="pole"  method="get" th:action="@{/price}" class="formmenu">
+                <li><input class="activebtn" name="price" type="submit" value="Цены"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/franchise">
+            <form name="pole"  method="get" th:action="@{/franchise}" class="formmenu">
+                <li><input class="activebtn" name="franchise" type="submit" value="Франдшиза"/></li>
+            </form>
+        </div>
+
+
+    </ul>
+</nav>
+<div class="menu">
+    <div class="footer">
+        <div sec:authorize="isAuthenticated()">
+            <form method="post" th:action="@{/logout}">
+                <input class="activebtnfooterlog" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
+            </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <form method="get" th:action="@{/login}">
+                <input class="activebtnfooterauth" type="submit" value="Авторизоваться"/>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div id="content">
     <center><h3>Добро пожаловать</h3></center>
 

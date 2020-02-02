@@ -256,7 +256,7 @@ h3 {
 .footer{
 	position: absolute;
 	width: 198px;
-	height: 88px;
+	height: 100px;
 	bottom: -29px;
 	background: rgb(4, 52, 65);
 	z-index: 13;

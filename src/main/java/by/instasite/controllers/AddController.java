@@ -95,7 +95,9 @@ public class AddController {
 
     @GetMapping(value = "/add/station")
     public String AddStation(Model model) {
-        model.addAttribute("station");
+        model.addAttribute("station", new Station());
+        model.addAttribute("franchise", new Franchise());
+        model.addAttribute("franchises", franchiseService.findAll());
         return "add/station";
     }
 
@@ -115,7 +117,19 @@ public class AddController {
     @PostMapping(value = "/add/franchise")
     public String SaveFranchise(Model model, @ModelAttribute Franchise franchise) {
         try {
+
             franchiseService.saveFranchise(franchise);
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
+            return "/add/franchise";
+        }
+        return "redirect:/franchise";
+    }
+
+    @PostMapping(value = "/add/station")
+    public String SaveStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
+        try {
+            // stationService.saveStation(franchise,station);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
             return "/add/franchise";
@@ -126,8 +140,8 @@ public class AddController {
     @PostMapping(value = "/add/fuel")
     public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel, @ModelAttribute Price price) {
         try {
-            fuel.setPrice(price);
-            fuelService.addFuel(station, fuel);
+            fuel.setStation(stationService.getStationByName(station.getName()));
+            fuelService.addFuel(fuel);
             priceService.addPrice(fuel, price);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");

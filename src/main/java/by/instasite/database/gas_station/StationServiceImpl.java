@@ -1,6 +1,5 @@
 package by.instasite.database.gas_station;
 
-import by.instasite.database.franchise.Franchise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +23,12 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public List<Station> getStationsByName(String name) {
+    public Station getStationByName(String name) {
         return repository.findByName(name);
     }
 
     @Override
-    public void saveStation(Franchise franchise, Station station) {
-        station.setId(franchise.getId());
+    public void saveStation(Station station) {
         repository.save(station);
     }
 

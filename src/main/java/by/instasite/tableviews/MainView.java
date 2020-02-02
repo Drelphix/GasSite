@@ -10,6 +10,7 @@ public class MainView implements Comparator<MainView> {
     private double price;
 
     public MainView() {
+
     }
 
     public MainView(String franchise, String stationName, String stationAddress, String fuelName, double price) {

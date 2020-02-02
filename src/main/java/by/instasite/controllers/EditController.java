@@ -69,6 +69,13 @@ public class EditController {
         return "add/client";
     }
 
+    @GetMapping(value = "/edit/franchise")
+    public String EditFranchise(Model model, @RequestParam(name = "id") int id) {
+        Franchise franchise = franchiseService.getById(id);
+        model.addAttribute("franchise", franchise);
+        return "add/franchise";
+    }
+
 
     @GetMapping(value = "/edit/employee")
     public String EditEmployee(Model model, @RequestParam(name = "id") int id) {

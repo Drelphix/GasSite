@@ -83,9 +83,9 @@
                 <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>
                 <p><input placeholder="Телефон" required th:field="${employee.telephone}" type="tel"></p>
                 <p><select th:field="${station.id}">
-                    <option th:each="fran : ${stations}"
-                            th:text="${fran.name}"
-                            th:value="${fran.id}">
+                    <option th:each="station : ${stations}"
+                            th:text="${station.name}"
+                            th:value="${station.id}">
                     </option>
                 </select>
                 </p>

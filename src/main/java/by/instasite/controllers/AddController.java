@@ -73,11 +73,6 @@ public class AddController {
         return "add/franchise";
     }
 
-    @GetMapping(value = "/add/card")
-    public String AddCard(Model model) {
-        model.addAttribute("card");
-        return "add/card";
-    }
 
     @GetMapping(value = "/add/employee")
     public String AddEmployee(Model model) {

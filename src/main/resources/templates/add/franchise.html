@@ -72,32 +72,17 @@
 </div>
 
 <div id="content">
-    <center><h3>Добавить сотрудника</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addemployee}">
+    <center><h3>Добавление франдшизы</h3></center>
+    <form action="#" class="transparent" method="post" th:action="@{/add/client}">
         <div class="form-inner">
             <a th:text="${error}"></a>
             <center>
-                <p><input required type="text" placeholder="Имя"></p>
-                <p><input required type="text" placeholder="Фамилия"></p>
-                <p><input required type="text" placeholder="Адрес"></p>
-                <p><input required type="tel" placeholder="Телефон"></p>
-                <p><select th:each="stat : ${station}">
-                    <option th:value="${station.id}"></option>
-                </select>
-                </p>
-
+                <p><input placeholder="Название" required th:field="${franchise.name}" type="text"></p>
                 <form action="#" class="transparent" method="post" th:action="@{/login}">
                     <div class="form-inner">
-                        <input class="input" type="submit" value="Войти"/>
+                        <input class="input" type="submit" value="Сохранить"/>
                     </div>
                 </form>
-
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.password}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.country}"></td>
-
             </center>
         </div>
     </form>

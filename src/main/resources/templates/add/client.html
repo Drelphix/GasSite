@@ -13,7 +13,8 @@
     <ul>
         <div sec:authorize="isAuthenticated()">
             <li>
-                <center><a th:href="@{/settings}"  class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
+                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span
+                        sec:authentication="name"></span></a></center>
             </li>
         </div>
 
@@ -87,7 +88,7 @@
                     </div>
                 </form>
             </center>
-    </div>
+        </div>
     </form>
 </div>
 </body>

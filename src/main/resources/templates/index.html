@@ -174,7 +174,7 @@ function reservationListFunction() {
                 </thead>
                 <tbody>
                 <tr th:each="fuel,row: ${fuels}">
-                    <td th:text="${fuel.name}"></td>
+                    <td th:text="${fuel.fuelName}"></td>
                     <td th:text="${fuel.description}"></td>
                     <td th:text="${fuel.price}"></td>
                 </tr>

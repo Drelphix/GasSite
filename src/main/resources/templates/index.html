@@ -155,7 +155,7 @@ function reservationListFunction() {
                 </thead>
                 <tbody>
                 <tr th:each="client,row: ${clients}">
-                    <td th:text="${client.name}"></td>
+                    <td><a href="/edit/client" th:href="@{/edit/client/(id=${client.id})}" th:text="${client.name}"></a>
                     <td th:text="${client.surname}"></td>
                     <td th:text="${client.address}"></td>
                     <td th:text="${client.telephone}"></td>
@@ -194,7 +194,8 @@ function reservationListFunction() {
                 </thead>
                 <tbody>
                 <tr th:each="employee,row: ${employees}">
-                    <td th:text="${employee.name}"></td>
+                    <td><a href="/edit/employee" th:href="@{/edit/employee/(id=${employee.id})}"
+                           th:text="${employee.name}"></a>
                     <td th:text="${employee.surname}"></td>
                     <td th:text="${employee.address}"></td>
                     <td th:text="${employee.telephone}"></td>
@@ -210,11 +211,17 @@ function reservationListFunction() {
                 <thead>
                 <th>Номер</th>
                 <th>Название</th>
+                <th>Количество станций</th>
+                <th>Количество клиентов</th>
                 </thead>
                 <tbody>
                 <tr th:each="franchise,row: ${franchises}">
+
                     <td th:text="${franchise.id}"></td>
-                    <td th:text="${franchise.name}"></td>
+                    <td><a href="/edit/franchise" th:href="@{/edit/franchise/(id=${franchise.id})}"
+                           th:text="${franchise.name}"></a>
+                    <td th:text="${#lists.size(franchise.stations)}"></td>
+                    <td th:text="${#lists.size(franchise.client)}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -250,11 +257,17 @@ function reservationListFunction() {
                 <thead>
                 <th>Название заправки</th>
                 <th>Адрес</th>
+                <th>Количество работников</th>
+                <th>Количество видов топлива</th>
+                >
                 </thead>
                 <tbody>
                 <tr th:each="station : ${stations}">
-                    <td th:text="${station.name}"></td>
+                    <td><a href="/edit/station" th:href="@{/edit/station/(id=${station.id})}"
+                           th:text="${station.name}"></a>
                     <td th:text="${station.address}"></td>
+                    <td th:text="${#lists.size(station.employee)}"></td>
+                    <td th:text="${#lists.size(station.fuel)}"></td>
                 </tr>
                 </tbody>
             </table>

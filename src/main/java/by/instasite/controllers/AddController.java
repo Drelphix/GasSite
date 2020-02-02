@@ -10,4 +10,30 @@ public class AddController {
     public String AddClient(Model model) {
         return "add/client";
     }
+
+    @GetMapping(value = "/add/card")
+    public String AddCard(Model model) {
+        return "add/card";
+    }
+
+    @GetMapping(value = "/add/employee")
+    public String AddEmployee(Model model) {
+        return "add/employee";
+    }
+
+    @GetMapping(value = "/add/fuel")
+    public String AddFuel(Model model) {
+        return "add/fuel";
+    }
+
+    @GetMapping(value = "/add/price")
+    public String AddPrice(Model model) {
+        return "add/price";
+    }
+
+    @GetMapping(value = "/add/station")
+    public String AddStation(Model model) {
+        return "add/station";
+    }
 }
+

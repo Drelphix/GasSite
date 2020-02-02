@@ -67,16 +67,18 @@
 </div>
 
 <div id="content">
-    <center><h3>Добавление нового клиента</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addclient}">
+    <center><h3>Добавление дисконтной карты</h3></center>
+    <form action="#" class="transparent" method="post" th:action="@{/addfuel}">
     <div class="form-inner">
     <a th:text="${error}"></a>
     <center>
-            <p><input required  type="text" placeholder="Имя"></p>
-            <p><input required  type="text" placeholder="Фамилия"></p>
-            <p><input required  type="text" placeholder="Адрес"></p>
-            <p><input required  type="tel" placeholder="Телефон"></p>
-            <p><input required  type="text" placeholder="Дисконтная карта"></p>
+            <p><input required  type="text" placeholder="Название"></p>
+            <p><textarea name="description" cols="40" rows="3"></textarea></p>
+            <p>
+                <select th:each="user : ${idStation}">
+                <option th:value="${id}"></option>
+                </select>
+            </p>
 
         <form action="#" class="transparent" method="post" th:action="@{/login}">
             <div class="form-inner">

@@ -24,7 +24,7 @@ public class FuelServiceImpl implements FuelService {
 
     @Override
     public void addFuel(Fuel fuel) {
-        repository.save(fuel);
+        repository.saveAndFlush(fuel);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class FuelServiceImpl implements FuelService {
         updated.setStation(station);
         updated.setFuelName(fuelName);
         updated.setDescription(description);
-        repository.save(updated);
+        repository.saveAndFlush(updated);
     }
 
     @Override

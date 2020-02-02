@@ -131,11 +131,6 @@ public class AddController {
     public String SaveStation(Model model, @ModelAttribute Station station, @ModelAttribute Franchise franchise) {
         try {
             station.setFranchise(franchiseService.getById(franchise.getId()));
-            station.setFuel(null);
-            station.setEmployee(null);
-            System.out.println("FRANSHISEID" + station.getFranchise().getId());
-            System.out.println("FRANSHISEID" + station.getName());
-            System.out.println("FRANSHISEID" + station.getAddress());
             stationService.saveStation(station);
         } catch (Exception e) {
             e.printStackTrace();

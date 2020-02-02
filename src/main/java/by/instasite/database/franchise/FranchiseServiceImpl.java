@@ -28,14 +28,14 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public void saveFranchise(Franchise franchise) {
-        repository.save(franchise);
+        repository.saveAndFlush(franchise);
     }
 
     @Override
     public void updateFranchise(Franchise franchise, String name) {
         Franchise updated = repository.getOne(franchise.getId());
         updated.setName(name);
-        repository.save(updated);
+        repository.saveAndFlush(updated);
     }
 
 

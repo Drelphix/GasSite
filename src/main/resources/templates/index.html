@@ -43,7 +43,8 @@ function reservationListFunction() {
     <ul>
         <div sec:authorize="isAuthenticated()">
             <li>
-                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span sec:authentication="name"></span></a></center>
+                <center><a th:href="@{/settings}" class="active" id="userlog">Добро пожаловать, <span
+                        sec:authentication="name"></span></a></center>
             </li>
         </div>
 
@@ -52,7 +53,9 @@ function reservationListFunction() {
                 <li><input class="activebtnadmin" type="submit" value="Администрирование"/></li>
             </form>
         </div>
-
+        <form class="formmenu" method="get" th:action="@{/}">
+            <li><input class="activebtn" type="submit" value="Главная"/></li>
+        </form>
         <div sec:authorize-url="/client">
             <form name="pole"  method="get" th:action="@{/client}" class="formmenu">
                 <li><input class="activebtn" name="client" type="submit" value="Клиенты"/></li>
@@ -70,13 +73,37 @@ function reservationListFunction() {
                 <li><input class="activebtn" name="price" type="submit" value="Цены"/></li>
             </form>
         </div>
-
+        <div sec:authorize-url="/station">
+            <form class="formmenu" method="get" th:action="@{/station}">
+                <li><input class="activebtn" type="submit" value="Станции"/></li>
+            </form>
+        </div>
         <div sec:authorize-url="/franchise">
             <form name="pole"  method="get" th:action="@{/franchise}" class="formmenu">
                 <li><input class="activebtn" name="franchise" type="submit" value="Франдшиза"/></li>
             </form>
         </div>
 
+        <div sec:authorize-url="/add/**">
+            <form class="formmenu" method="get" th:action="@{/add/client}" th:if="${clients}">
+                <li><input class="activebtn" type="submit" value="Добавить пользователя"/></li>
+            </form>
+            <form class="formmenu" method="get" th:action="@{/add/fuel}" th:if="${fuels}">
+                <li><input class="activebtn" type="submit" value="Добавить топливо"/></li>
+            </form>
+            <form class="formmenu" method="get" th:action="@{/add/card}" th:if="${cards}">
+                <li><input class="activebtn" type="submit" value="Добавить карту"/></li>
+            </form>
+            <form class="formmenu" method="get" th:action="@{/add/employee}" th:if="${employees}">
+                <li><input class="activebtn" type="submit" value="Добавить работника"/></li>
+            </form>
+            <form class="formmenu" method="get" th:action="@{/add/station}" th:if="${stations}">
+                <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
+            </form>
+            <form class="formmenu" method="get" th:action="@{/admin/add}" th:if="${stations}">
+                <li><input class="activebtn" type="submit" value="Добавить станцию"/></li>
+            </form>
+        </div>
 
     </ul>
 </nav>
@@ -188,6 +215,44 @@ function reservationListFunction() {
                 <tr th:each="franchise,row: ${franchises}">
                     <td th:text="${franchise.id}"></td>
                     <td th:text="${franchise.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${users}">
+            <center><h3>Название компаний</h3></center>
+            <table border="1px" id="myTable">
+                <thead>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Почта</th>
+                <th>Страна</th>
+                <th>Роль</th>
+                <th>Активен</th>
+                </thead>
+                <tbody>
+                <tr th:each="client : ${users}">
+                    <td th:text="${client.username}"></td>
+                    <td th:text="${client.password}"></td>
+                    <td th:text="${client.email}"></td>
+                    <td th:text="${client.country}"></td>
+                    <td th:text="${client.role}"></td>
+                    <td th:text="${client.active}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${stations}">
+            <center><h3>Станции </h3></center>
+            <table border="1px" id="myTable">
+                <thead>
+                <th>Название заправки</th>
+                <th>Адрес</th>
+                </thead>
+                <tbody>
+                <tr th:each="station : ${stations}">
+                    <td th:text="${station.name}"></td>
+                    <td th:text="${station.address}"></td>
                 </tr>
                 </tbody>
             </table>

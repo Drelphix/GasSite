@@ -28,6 +28,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee getEmployeeById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void updateEmployee(int id, String name, String surname, String address, String telephone, Station station) {
         Employee updated = repository.getOne(id);
         updated.setStation(station);

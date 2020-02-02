@@ -29,6 +29,11 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
+    public Station getStationById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void saveStation(Station station) {
         repository.saveAndFlush(station);
     }

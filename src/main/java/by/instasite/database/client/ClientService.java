@@ -9,6 +9,8 @@ public interface ClientService {
 
     Client getClientByTelephone(String telephone);
 
+    Client getClientById(int id);
+
     Client getClientByCard(int card);
 
     Card getCardById(int id);

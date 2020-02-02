@@ -34,6 +34,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public Client getClientById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public Client getClientByCard(int card) {
         return repository.findByCard(card);
     }

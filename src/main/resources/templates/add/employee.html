@@ -77,6 +77,7 @@
         <div class="form-inner">
             <a th:text="${error}"></a>
             <center>
+                <p><input th:field="${employee.id}" th:text="${employee.id}" type="hidden"></p>
                 <p><input placeholder="Имя" required th:field="${employee.name}" type="text"></p>
                 <p><input placeholder="Фамилия" required th:field="${employee.surname}" type="text"></p>
                 <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>

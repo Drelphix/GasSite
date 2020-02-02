@@ -9,6 +9,8 @@ public interface StationService {
 
     Station getStationByName(String name);
 
+    Station getStationById(int id);
+
     void saveStation(Station station);
 
     void updateStation(int id, String name, String address, Franchise franchise);

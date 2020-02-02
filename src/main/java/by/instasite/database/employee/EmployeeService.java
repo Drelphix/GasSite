@@ -9,6 +9,8 @@ public interface EmployeeService {
 
     void addEmployee(Employee employee);
 
+    Employee getEmployeeById(int id);
+
     void updateEmployee(int id, String name, String surname, String address, String telephone, Station station);
 
     void deleteEmployee(int id);

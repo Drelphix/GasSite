@@ -4,6 +4,7 @@ import by.instasite.database.client.Client;
 import by.instasite.database.client.ClientService;
 import by.instasite.database.discount_card.Card;
 import by.instasite.database.discount_card.CardService;
+import by.instasite.database.employee.Employee;
 import by.instasite.database.employee.EmployeeService;
 import by.instasite.database.franchise.Franchise;
 import by.instasite.database.franchise.FranchiseService;
@@ -60,18 +61,21 @@ public class EditController {
     }
 
 
-
     @GetMapping(value = "/edit/client")
-    public String EditClient(Model model) {
-        model.addAttribute("client", new Client());
-        model.addAttribute("card", new Card());
+    public String EditClient(Model model, @RequestParam(name = "id") int id) {
+        Client client = clientService.getClientById(id);
+        model.addAttribute("client", client);
+        model.addAttribute("card", client.getCard());
         return "add/client";
     }
 
 
     @GetMapping(value = "/edit/employee")
-    public String EditEmployee(Model model) {
-        model.addAttribute("employee");
+    public String EditEmployee(Model model, @RequestParam(name = "id") int id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        model.addAttribute("stations", stationService.findAll());
+        model.addAttribute("station", employee.getStation());
         return "add/employee";
     }
 
@@ -85,9 +89,10 @@ public class EditController {
     }
 
     @GetMapping(value = "/edit/station")
-    public String EditStation(Model model) {
-        model.addAttribute("station", new Station());
-        model.addAttribute("franchise", new Franchise());
+    public String EditStation(Model model, @RequestParam(name = "id") int id) {
+        Station station = stationService.getStationById(id);
+        model.addAttribute("station", station);
+        model.addAttribute("franchise", station.getFranchise());
         model.addAttribute("franchises", franchiseService.findAll());
         return "add/station";
     }
@@ -119,6 +124,8 @@ public class EditController {
     @PostMapping(value = "/edit/station")
     public String SaveEditedStation(Model model, @ModelAttribute Franchise franchise, @ModelAttribute Station station) {
         try {
+            station.setFranchise(franchiseService.getByName(franchise.getName()));
+            stationService.saveStation(station);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка редактирования станции, попробуйте еще раз");
             return "redirect:/station";
@@ -130,7 +137,7 @@ public class EditController {
     public String SaveEditedFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel) {
         try {
             fuel.setStation(stationService.getStationByName(station.getName()));
-            fuelService.updateFuel(fuel.getId(), fuel.getFuelName(), fuel.getDescription(), fuel.getPrice(), fuel.getStation());
+            fuelService.addFuel(fuel);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка редактирования, попробуйте еще раз");
             return "redirect:/fuel";

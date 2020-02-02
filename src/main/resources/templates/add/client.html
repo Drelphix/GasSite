@@ -68,29 +68,21 @@
 
 <div id="content">
     <center><h3>Добавление нового клиента</h3></center>
-    <form action="#" class="transparent" method="post" th:action="@{/addclient}">
-    <div class="form-inner">
-    <a th:text="${error}"></a>
-    <center>
-            <p><input required  type="text" placeholder="Имя"></p>
-            <p><input required  type="text" placeholder="Фамилия"></p>
-            <p><input required  type="text" placeholder="Адрес"></p>
-            <p><input required  type="tel" placeholder="Телефон"></p>
-            <p><input required  type="text" placeholder="Дисконтная карта"></p>
-
-        <form action="#" class="transparent" method="post" th:action="@{/login}">
-            <div class="form-inner">
-                <input class="input" type="submit" value="Войти"/>
-            </div>
-        </form>
-
-            <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.country}"></td>
-
-    </center>
+    <form action="#" class="transparent" method="post" th:action="@{/add/client}">
+        <div class="form-inner">
+            <a th:text="${error}"></a>
+            <center>
+                <p><input placeholder="Имя" required th:field="${client.name}" type="text"></p>
+                <p><input placeholder="Фамилия" required th:field="${client.surname}" type="text"></p>
+                <p><input placeholder="Адрес" required th:field="${client.address}" type="text"></p>
+                <p><input placeholder="Телефон" required th:field="${client.telephone}" type="tel"></p>
+                <p><input placeholder="% Скидки" required th:field="${card.discount}" type="text"></p>
+                <form action="#" class="transparent" method="post" th:action="@{/login}">
+                    <div class="form-inner">
+                        <input class="input" type="submit" value="Войти"/>
+                    </div>
+                </form>
+            </center>
     </div>
     </form>
 </div>

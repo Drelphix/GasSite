@@ -150,7 +150,7 @@ public class AddController {
     @PostMapping(value = "/add/employee")
     public String SaveEmployee(Model model, @ModelAttribute Employee employee, @ModelAttribute Station station) {
         try {
-            employee.setStation(stationService.getStationByName(station.getName()));
+            employee.setStation(stationService.getStationById(station.getId()));
             employeeService.addEmployee(employee);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");

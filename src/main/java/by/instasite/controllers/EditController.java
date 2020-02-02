@@ -152,4 +152,17 @@ public class EditController {
         return "redirect:/fuel";
     }
 
+    @PostMapping(value = "/edit/employee")
+    public String SaveEditedEmployee(Model model, @ModelAttribute Employee employee, @ModelAttribute Station station) {
+        try {
+            employee.setStation(stationService.getStationByName(station.getName()));
+            employeeService.addEmployee(employee);
+        } catch (Exception e) {
+            model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
+            return "redirect:/add/employee";
+        }
+        return "redirect:/employee";
+
+    }
+
 }

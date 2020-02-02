@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -24,18 +25,19 @@ public class UserController {
         return "user_settings";
     }
 
-    @GetMapping(value = "/admin/add")
-    public String ChangeUserInfo(Model model) {
-        List<User> users = service.findAll();
-        model.addAttribute("users", users);
-        return "index";
+    @GetMapping(value = "/edit/admin")
+    public String getEditedUser(Model model, @RequestParam(name = "id") int id) {
+        User user = service.getUserById(id);
+        model.addAttribute("client", user);
+        return "/edit/admin";
     }
 
-    @GetMapping(value = "/admin")
-    public String Administration(Model model) {
-        List<User> users = service.findAll();
-        model.addAttribute("users", users);
-        return "index";
+    @PostMapping(value = "/edit/admin")
+    public String saveEditedUser(Model model, @ModelAttribute User user) {
+        User update = service.getUserById(user.getId());
+        user.setPassword(update.getPassword());
+        service.saveUser(user);
+        return "/admin";
     }
 
 }

@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(int id) {
+        return repository.getOne(id);
+    }
+
+    @Override
     public void updateUser(String username, String password, String email, String country) {
         User updated = repository.findByUsername(username);
         updated.setPassword(passwordEncoder.encode(password));

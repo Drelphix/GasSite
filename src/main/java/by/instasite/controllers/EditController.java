@@ -85,6 +85,7 @@ public class EditController {
         model.addAttribute("employee", employee);
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("station", employee.getStation());
+        model.addAttribute("edit", true);
         return "add/employee";
     }
 

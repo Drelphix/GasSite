@@ -95,7 +95,12 @@
                         <input class="input" type="submit" value="Сохранить"/>
                     </div>
                 </form>
-
+                <form action="#" class="transparent" method="post" th:action="@{/delete/employee}" th:if="${edit}">
+                    <div class="form-inner">
+                        <p><input th:field="${employee.id}" th:value="${employee.id}" type="hidden"></p>
+                        <input class="input" type="submit" value="Удалить"/>
+                    </div>
+                </form>
             </center>
         </div>
     </form>

@@ -240,8 +240,7 @@ function reservationListFunction() {
                 </tr>
                 <tbody>
                 <tr th:each="client : ${users}">
-                    <td><a href="/edit/admin" th:href="@{/edit/admin/(id=${client.id})}"
-                           th:text="${client.username}"></a>
+                    <td th:text="${client.username}"></td>
                     <td th:text="${client.password}"></td>
                     <td th:text="${client.email}"></td>
                     <td th:text="${client.country}"></td>

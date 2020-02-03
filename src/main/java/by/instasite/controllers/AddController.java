@@ -64,6 +64,7 @@ public class AddController {
     public String AddClient(Model model) {
         model.addAttribute("client", new Client());
         model.addAttribute("card", new Card());
+        model.addAttribute("franchises", franchiseService.findAll());
         return "add/client";
     }
 
@@ -99,9 +100,11 @@ public class AddController {
     }
 
     @PostMapping(value = "/add/client")
-    public String SaveClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client) {
+    public String SaveClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client, @ModelAttribute Franchise franchise) {
         try {
+            Franchise updatedFran = franchiseService.getById(franchise.getId());
             client.setCard(card);
+            client.setFranchise(franchise);
             cardService.addCard(card);
             clientService.saveClient(client);
         } catch (Exception e) {

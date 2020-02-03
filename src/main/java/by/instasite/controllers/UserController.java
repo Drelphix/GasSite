@@ -25,19 +25,25 @@ public class UserController {
         return "user_settings";
     }
 
-    @GetMapping(value = "/edit/admin")
-    public String getEditedUser(Model model, @RequestParam(name = "id") int id) {
-        User user = service.getUserById(id);
-        model.addAttribute("client", user);
-        return "/edit/admin";
+    @GetMapping(value = "/admin")
+    public String getEditedUser(Model model) {
+        model.addAttribute("users", service.findAll());
+        return "index";
     }
 
-    @PostMapping(value = "/edit/admin")
+    @GetMapping(value = "/admin/edit")
+    public String getEditedUser(Model model, @RequestParam(name = "id") int id) {
+        User user = service.getUserById(id);
+        model.addAttribute("user", user);
+        return "add/admin";
+    }
+
+    @PostMapping(value = "/admin/edit")
     public String saveEditedUser(Model model, @ModelAttribute User user) {
         User update = service.getUserById(user.getId());
         user.setPassword(update.getPassword());
         service.saveUser(user);
-        return "/admin";
+        return "redirect:/admin";
     }
 
 }

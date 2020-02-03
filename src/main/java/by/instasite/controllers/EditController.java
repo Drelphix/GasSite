@@ -66,6 +66,8 @@ public class EditController {
         Client client = clientService.getClientById(id);
         model.addAttribute("client", client);
         model.addAttribute("card", client.getCard());
+        model.addAttribute("franchises", franchiseService.findAll());
+        model.addAttribute("franchise", new Franchise());
         return "add/client";
     }
 
@@ -105,10 +107,12 @@ public class EditController {
     }
 
     @PostMapping(value = "/edit/client")
-    public String EditClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client) {
+    public String EditClient(Model model, @ModelAttribute Card card, @ModelAttribute Client client, @ModelAttribute Franchise franchise) {
         try {
+            Franchise franchise1 = franchiseService.getById(franchise.getId());
             client.setCard(card);
             cardService.addCard(card);
+            client.setFranchise(franchise1);
             clientService.saveClient(client);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");

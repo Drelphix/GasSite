@@ -83,11 +83,15 @@
                 <p><input placeholder="Адрес" required th:field="${client.address}" type="text"></p>
                 <p><input placeholder="Телефон" required th:field="${client.telephone}" type="tel"></p>
                 <p><input placeholder="% Скидки" required th:field="${card.discount}" type="text"></p>
-                <form action="#" class="transparent" method="post" th:action="@{/login}">
-                    <div class="form-inner">
-                        <input class="input" type="submit" value="Сохранить"/>
-                    </div>
-                </form>
+                <p>
+                    <select th:field="${franchise.id}">
+                        <option th:each="fran : ${franchises}"
+                                th:text="${fran.name}"
+                                th:value="${fran.id}">
+                        </option>
+                    </select>
+                </p>
+                <input class="input" type="submit" value="Сохранить"/>
             </center>
         </div>
     </form>

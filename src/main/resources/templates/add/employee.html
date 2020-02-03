@@ -76,12 +76,7 @@
     <form action="#" class="transparent" method="post" th:action="@{/add/employee}">
         <div class="form-inner">
             <a th:text="${error}"></a>
-            <center>
-                <p><input th:field="${employee.id}" th:value="${employee.id}" type="hidden"></p>
-                <p><input placeholder="Имя" required th:field="${employee.name}" type="text"></p>
-                <p><input placeholder="Фамилия" required th:field="${employee.surname}" type="text"></p>
-                <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>
-                <p><input placeholder="Телефон" required th:field="${employee.telephone}" type="tel"></p>
+            <form>
                 <p>
                     <select th:field="${station.id}">
                         <option th:each="stat : ${stations}"
@@ -90,11 +85,13 @@
                         </option>
                     </select>
                 </p>
-                <form action="#" class="transparent" method="post" th:action="@{/add/employee}">
-                    <div class="form-inner">
-                        <input class="input" type="submit" value="Сохранить"/>
-                    </div>
-                </form>
+                <p><input th:field="${employee.id}" th:value="${employee.id}" type="hidden"></p>
+                <p><input placeholder="Имя" required th:field="${employee.name}" type="text"></p>
+                <p><input placeholder="Фамилия" required th:field="${employee.surname}" type="text"></p>
+                <p><input placeholder="Адрес" required th:field="${employee.address}" type="text"></p>
+                <p><input placeholder="Телефон" required th:field="${employee.telephone}" type="tel"></p>
+                <input class="input" type="submit" value="Сохранить"/>
+            </form>
                 <form action="#" class="transparent" method="post" th:action="@{/delete/employee}" th:if="${edit}">
                     <div class="form-inner">
                         <p><input th:field="${employee.id}" th:value="${employee.id}" type="hidden"></p>

@@ -3,6 +3,7 @@ package by.instasite.controllers;
 import by.instasite.database.user.User;
 import by.instasite.database.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,9 @@ public class UserController {
     }
 
     @GetMapping(value = "/settings")
-    public String UserAccount(Model model) {
-        model.addAttribute("client");
+    public String EditUserAccount(Model model) {
+        User user = service.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("client", user);
         return "user_settings";
     }
 
@@ -46,4 +48,22 @@ public class UserController {
         return "redirect:/admin";
     }
 
+    @PostMapping(value = "/settings")
+    public String SaveEditedUserAccount(Model model, @ModelAttribute User user) {
+        User userById = service.getUserById(user.getId());
+        if (user.getPassword() != null) {
+            userById.setPassword(user.getPassword());
+        }
+        if (user.getUsername() != null) {
+            userById.setUsername(user.getUsername());
+        }
+        if (user.getEmail() != null) {
+            userById.setEmail(user.getEmail());
+        }
+        if (user.getCountry() != null) {
+            userById.setCountry(user.getCountry());
+        }
+        service.saveUser(userById);
+        return "redirect:/";
+    }
 }

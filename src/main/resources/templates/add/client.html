@@ -77,12 +77,6 @@
         <div class="form-inner">
             <a th:text="${error}"></a>
             <center>
-                <p><input th:field="${client.id}" th:value="${client.id}" type="hidden"></p>
-                <p><input placeholder="Имя" required th:field="${client.name}" type="text"></p>
-                <p><input placeholder="Фамилия" required th:field="${client.surname}" type="text"></p>
-                <p><input placeholder="Адрес" required th:field="${client.address}" type="text"></p>
-                <p><input placeholder="Телефон" required th:field="${client.telephone}" type="tel"></p>
-                <p><input placeholder="% Скидки" required th:field="${card.discount}" type="text"></p>
                 <p>
                     <select th:field="${franchise.id}">
                         <option th:each="fran : ${franchises}"
@@ -91,6 +85,13 @@
                         </option>
                     </select>
                 </p>
+                <p><input th:field="${client.id}" th:value="${client.id}" type="hidden"></p>
+                <p><input placeholder="Имя" required th:field="${client.name}" type="text"></p>
+                <p><input placeholder="Фамилия" required th:field="${client.surname}" type="text"></p>
+                <p><input placeholder="Адрес" required th:field="${client.address}" type="text"></p>
+                <p><input placeholder="Телефон" required th:field="${client.telephone}" type="tel"></p>
+                <p><input placeholder="% Скидки" required th:field="${card.discount}" type="text"></p>
+
                 <input class="input" type="submit" value="Сохранить"/>
             </center>
         </div>

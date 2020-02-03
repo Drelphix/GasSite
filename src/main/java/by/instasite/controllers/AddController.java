@@ -134,7 +134,7 @@ public class AddController {
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");
-            return "redirect:/add/station";
+            return "redirect:/station";
         }
         return "redirect:/station";
     }
@@ -142,7 +142,7 @@ public class AddController {
     @PostMapping(value = "/add/fuel")
     public String SaveFuel(Model model, @ModelAttribute Station station, @ModelAttribute Fuel fuel) {
         try {
-            fuel.setStation(stationService.getStationByName(station.getName()));
+            fuel.setStation(stationService.getStationById(station.getId()));
             fuelService.addFuel(fuel);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления пользователя, попробуйте еще раз");
@@ -152,9 +152,9 @@ public class AddController {
     }
 
     @PostMapping(value = "/add/employee")
-    public String SaveEmployee(Model model, @ModelAttribute Employee employee, @ModelAttribute Station station) {
+    public String SaveEmployee(Model model, @ModelAttribute(name = "employee") Employee employee, @ModelAttribute(name = "station") Station stat) {
         try {
-            employee.setStation(stationService.getStationById(station.getId()));
+            employee.setStation(stationService.getStationById(stat.getId()));
             employeeService.addEmployee(employee);
         } catch (Exception e) {
             model.addAttribute("error", "Ошибка добавления франшизы, попробуйте еще раз");

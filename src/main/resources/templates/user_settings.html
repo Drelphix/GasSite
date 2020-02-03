@@ -1,19 +1,86 @@
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}"/>
+    <script src='http://code.jquery.com/jquery-1.12.2.js' type='text/javascript'></script>
+    <meta charset="UTF-8">
+    <title>InstaSite</title>
 
-    <title>Редактирование профиля</title>
 </head>
+
 <body>
-<form action="#" class="transparent" method="post" th:action="@{/user_settings}" th:object="${client}">
+
+<nav id="menuVertical">
+    <ul>
+        <div sec:authorize="isAuthenticated()">
+            <li>
+                <center><a class="active" id="userlog" th:href="@{/settings}">Добро пожаловать, <span
+                        sec:authentication="name"></span></a></center>
+            </li>
+        </div>
+
+        <div sec:authorize-url="/admin">
+            <form class="formmenu" method="get" th:action="@{/admin}">
+                <li><input class="activebtnadmin" type="submit" value="Администрирование"/></li>
+            </form>
+        </div>
+
+        <form class="formmenu" method="get" th:action="@{/}">
+            <li><input class="activebtn" type="submit" value="Главная"/></li>
+        </form>
+
+        <div sec:authorize-url="/client">
+            <form class="formmenu" method="get" th:action="@{/client}">
+                <li><input class="activebtn" type="submit" value="Клиенты"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/employee">
+            <form class="formmenu" method="get" th:action="@{/employee}">
+                <li><input class="activebtn" type="submit" value="Сотрудники"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/price">
+            <form class="formmenu" method="get" th:action="@{/price}">
+                <li><input class="activebtn" type="submit" value="Цены"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/station">
+            <form class="formmenu" method="get" th:action="@{/station}">
+                <li><input class="activebtn" type="submit" value="Станции"/></li>
+            </form>
+        </div>
+
+        <div sec:authorize-url="/franchise">
+            <form class="formmenu" method="get" th:action="@{/franchise}">
+                <li><input class="activebtn" type="submit" value="Франдшиза"/></li>
+            </form>
+        </div>
+
+
+    </ul>
+</nav>
+<div class="menu">
+    <div class="footer">
+        <div sec:authorize="isAuthenticated()">
+            <form method="post" th:action="@{/logout}">
+                <input class="activebtnfooterlog" method="post" th:action="@{/logout}" type="submit" value="Выйти"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<form action="#" class="transparent" method="post" th:action="@{/settings}" th:object="${client}">
     <div class="form-inner">
         <center><h3>Редактирование профиля</h3></center>
         <p th:text="${message}"></p>
-        <p style="color:white">Логин: <input required type="text" th:field="*{username}"/></p>
-        <p style="color:white">Пароль: <input required type="password" th:field="*{password}"/></p>
+        <input th:field="*{id}" th:value="*{id}" type="hidden"/>
+        <p style="color:white">Логин: <input required th:field="*{username}" th:value="*{username}" type="text"/></p>
+        <p style="color:white">Пароль: <input required th:field="*{password}" th:value="*{password}" type="password"/>
+        </p>
         <p style="color:white">Подтвердите пароль: <input required th:object="${repeat}" type="password"/></p>
-        <p style="color:white">Email: <input required type="email" th:field="*{email}"/></p>
-        <p style="color:white">Email: <input required type="text" th:field="*{email}"/></p>
+        <p style="color:white">Email: <input required th:field="*{email}" th:value="*{email}" type="email"/></p>
         <p><input class="input" type="submit" value="Обновить"/></p>
     </div>
 </form>

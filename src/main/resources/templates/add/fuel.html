@@ -34,6 +34,7 @@
             </form>
         </div>
 
+
         <div sec:authorize-url="/employee">
             <form method="get" th:action="@{/employee}" class="formmenu">
                 <li><input class="activebtn" type="submit" value="Сотрудники"/></li>
@@ -79,10 +80,10 @@
             <a th:text="${error}"></a>
             <center>
                 <p>
-                    <select th:field="${station.name}">
+                    <select th:field="${station.id}">
                         <option th:each="stat : ${stations}"
                                 th:text="${stat.name}"
-                                th:value="${stat.name}">
+                                th:value="${stat.id}">
                             Станции
                         </option>
                     </select>

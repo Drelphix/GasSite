@@ -65,6 +65,7 @@ public class AddController {
         model.addAttribute("client", new Client());
         model.addAttribute("card", new Card());
         model.addAttribute("franchises", franchiseService.findAll());
+        model.addAttribute("franchise", new Franchise());
         return "add/client";
     }
 

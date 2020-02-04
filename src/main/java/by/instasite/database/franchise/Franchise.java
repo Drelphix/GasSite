@@ -12,7 +12,7 @@ import java.util.Set;
 public class Franchise {
     @Id
     @Column(name = "idFranchise")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Station.class)

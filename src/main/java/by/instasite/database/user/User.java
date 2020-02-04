@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @Column(name = "id_login")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "username")

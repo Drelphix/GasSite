@@ -25,7 +25,6 @@ public class Franchise {
     private Set<Client> client;
 
     public Franchise() {
-
     }
 
     public Franchise(Set<Station> stations, String name, Set<Client> client) {

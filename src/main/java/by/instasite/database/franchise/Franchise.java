@@ -15,7 +15,6 @@ public class Franchise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Station.class)
     private Set<Station> stations;
 
